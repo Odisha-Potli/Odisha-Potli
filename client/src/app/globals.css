@@ -52,20 +52,27 @@ body {
   }
 }
 
-/* For Scrollbar */
-
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 1em;
+  width: 12px; /* Slim width for a modern look */
 }
 
+/* Scrollbar Track */
 ::-webkit-scrollbar-track {
-  background: hsla(51, 75%, 50%, 0.2); /* Use correct HSLA format with alpha */
-  border-radius: 100vw;
-  margin-block: 0.5em;
+  background: #f0dcc4; /* Light creamy beige for the track */
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1); /* Subtle inner shadow for depth */
+  margin-block: 0px; /* Consistent spacing at top/bottom */
 }
 
+/* Scrollbar Thumb */
 ::-webkit-scrollbar-thumb {
-  background: hsla(38, 89%, 47%, 0.8); /* Make thumb slightly transparent */
-  border: 0.25em solid hsla(38, 89%, 47%, 1); /* Ensure border uses valid HSLA */
-  border-radius: 100vw;
+  background: #97571c7d; /* Warm peachy tan for the thumb */
+  border: 2px solid #f0dcc4; /* Light border to blend with track */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Soft outer shadow for 3D effect */
+}
+
+/* Hover Effect for Thumb */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-yellow-800); /* Slightly darker shade for hover */
+  transition: background 0.2s ease; /* Smooth hover transition */
 }
