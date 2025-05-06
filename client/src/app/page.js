@@ -13,71 +13,68 @@ export default function Home() {
     <div className="bg-[#e6c39a]">
       <Navbar />
 
-      {/* Desktop/Tablet Section (visible on sm and above, hidden on mobile) */}
       <section
-        style={{ backgroundImage: "url('/Frame_20.png')" }}
-        className="bg-no-repeat bg-cover bg-bottom w-full h-screen hidden sm:block"
-      >
-        <div className="lg:text-[5rem] text-[10vw] lg:pl-10 pl-3 pt-10 font-bold text-[#744d20]">
-          Discover
-        </div>
-        <div className="lg:text-[5rem] text-[10vw] lg:pl-10 pl-3 font-bold text-[#744d20] mt-0 lg:-mt-[2rem]">
-          Odisha&apos;s Heritage
-        </div>
-        <div className="pt-[2rem] lg:pt-[2rem] pl-[1rem] lg:pl-[3rem] mt-0 lg:-mt-[2rem] text-sm lg:text-xl font-semibold text-[#744d20]">
-          OdishaPotli – Where Tradition Meets Handcrafted Elegance
-        </div>
+  style={{ backgroundImage: "url('/Frame_20.png')" }}
+  className="bg-no-repeat bg-cover bg-bottom w-full h-screen hidden sm:flex flex-col justify-center px-6 lg:px-20 text-[#744d20]"
+>
+  <h1 className="text-[10vw] lg:text-[3rem] font-extrabold leading-tight drop-shadow-sm">
+    Discover
+    <br />
+    Odisha&apos;s Heritage
+  </h1>
 
-        <div className="px-[1rem] lg:px-12 mt-6 md:mt-10 lg:pb-[0.1rem] lg:-mb-5 text-[#744d20] text-sm sm:text-base md:text-lg leading-relaxed lg:text-left text-justify lg:max-w-2/3">
-          OdishaPotli is your gateway to Odisha&apos;s rich heritage, offering a
-          curated collection of handwoven sarees, handcrafted clothing, and
-          traditional crafts, all meticulously created by skilled artisans. Our
-          mission is to preserve age-old craftsmanship while empowering local
-          artisans through fair trade and sustainable practices. Each purchase
-          directly supports artisan livelihoods, ensuring the legacy of
-          Odisha&apos;s exquisite artistry lives on.
-        </div>
+  <p className="mt-4 text-sm lg:text-lg font-medium max-w-2xl">
+    OdishaPotli – Where Tradition Meets Handcrafted Elegance
+  </p>
 
-        <div className="flex justify-center items-center lg:justify-start">
-          <Link href="/Shop/">
-            <div className="text-center lg:mx-32 mx-0 py-3 lg:py-6 mt-6 lg:ml-[3rem] ml-0 lg:mt-[5rem] lg:pt-5 lg:pl-2 font-bold text-xl lg:text-3xl bg-[#97571c] hover:bg-[#7c4f2e] transition-colors duration-200 rounded-xl lg:w-[15rem] lg:h-[5rem] w-48 flex flex-row items-center justify-center hover:shadow-5xl">
-              <button title="Explore!" onClick={() => {}}>
-                Shop Now!
-              </button>
-            </div>
-          </Link>
-        </div>
-      </section>
+  <p className="mt-2 text-sm lg:text-base max-w-3xl leading-relaxed">
+    OdishaPotli is your gateway to Odisha&apos;s rich heritage, offering a curated collection of
+    handwoven sarees, handcrafted clothing, and traditional crafts. Each purchase directly supports
+    artisan livelihoods, ensuring the legacy of Odisha&apos;s exquisite artistry lives on.
+  </p>
 
-      {/* Mobile Section (visible on mobile, hidden on sm and above) */}
-      <section className="bg-no-repeat bg-cover bg-bottom w-full h-screen sm:hidden flex flex-col justify-center items-center text-center px-4 bg-[#e8c49c]">
-        <div className="lg:text-[5rem] text-[10vw] lg:pl-10 pl-3 -mt-16 font-bold text-[#744d20] text-left self-start">
-          Discover
-        </div>
-        <div className="lg:text-[5rem] text-[10vw] lg:pl-10 pl-3 font-bold text-[#744d20] mt-0 lg:-mt-[2rem] self-start">
-          Odisha&apos;s Heritage
-        </div>
+  <Link href="/Shop/" className="mt-8 w-fit">
+    <button
+      title="Explore!"
+      className="px-8 py-3 lg:py-4 text-lg lg:text-xl font-bold bg-[#97571c] hover:bg-[#7c4f2e] text-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#744d20] focus:ring-offset-2"
+    >
+      Shop Now!
+    </button>
+  </Link>
+</section>
 
-        <div
-          style={{ backgroundImage: "url('Frame_20_mobile.png')" }}
-          className="w-full h-2/5 bg-[center_top] bg-cover"
-        ></div>
-        <div className="pt-[2rem] lg:pt-[2rem] pl-[0.5rem] lg:pl-[3rem] mt-0 lg:-mt-[2rem] text-sm lg:text-xl font-semibold text-[#744d20]">
-          OdishaPotli – Where Tradition Meets Handcrafted Elegance
-        </div>
+{/* Mobile Version */}
+<section className="sm:hidden flex flex-col justify-center items-center px-4 text-center text-[#744d20] bg-[#e8c49c] h-screen">
+  <h1 className="text-[10vw] font-extrabold leading-snug">
+    Discover
+    <br />
+    Odisha&apos;s Heritage
+  </h1>
 
-        <div className="text-[#744d20] pl-[0.5rem] text-md mt-4 leading-relaxed">
-          Explore our curated collection of handwoven sarees and traditional
-          crafts, crafted by Odisha&apos;s skilled artisans.
-        </div>
-        <div>
-          <Link href="/Shop/">
-            <div className="mt-6 py-3 w-40 bg-[#97571c] hover:bg-[#7c4f2e] transition-colors duration-200 rounded-lg font-bold text-lg text-white text-center">
-              <button title="Explore!">Shop Now!</button>
-            </div>
-          </Link>
-        </div>
-      </section>
+  <div
+    style={{ backgroundImage: "url('/Frame_20_mobile.png')" }}
+    className="w-full h-2/5 bg-cover bg-center mt-4 rounded-lg"
+  />
+
+  <p className="mt-4 text-sm font-medium">
+    OdishaPotli – Where Tradition Meets Handcrafted Elegance
+  </p>
+
+  <p className="mt-2 text-sm leading-relaxed">
+    Explore our curated collection of handwoven sarees and traditional crafts, crafted by
+    Odisha&apos;s skilled artisans.
+  </p>
+
+  <Link href="/Shop/" className="mt-6">
+    <button
+      title="Explore!"
+      className="px-6 py-2 text-base font-bold bg-[#97571c] hover:bg-[#7c4f2e] text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#744d20] focus:ring-offset-2"
+    >
+      Shop Now!
+    </button>
+  </Link>
+</section>
+
 
       <WhoAreWeCarousel />
 
@@ -90,7 +87,7 @@ export default function Home() {
       <StandardisationsAndAssociations />
 
       <div className="flex flex-row justify-center items-center font-bold">
-        <div className="text-[6vw] text-black">
+        <div className="text-[4vw] text-black">
           <span className="text-[#97571c]">Contact</span> Us
         </div>
       </div>

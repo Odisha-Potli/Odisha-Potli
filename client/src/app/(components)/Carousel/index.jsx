@@ -19,7 +19,7 @@ const Carousel = () => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
 
-  const imageWidth = 512;
+  const imageWidth = 480;
   const imageHeight = 1024;
 
   return (

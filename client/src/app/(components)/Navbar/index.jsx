@@ -180,7 +180,7 @@ const Navbar = () => {
           isOpen
             ? "flex flex-col absolute top-16 left-0 right-0 bg-[#f0dcc4] shadow-md p-4 translate-y-0 opacity-100"
             : "hidden -translate-y-full opacity-0"
-        } md:flex md:flex-row md:items-center md:gap-16 md:px-4 md:py-4 md:bg-[#97571c7d] md:rounded-md md:static md:shadow-none md:translate-y-0 md:opacity-100 transition-all duration-300 ease-in-out lg:shadow-lg z-10`}
+        } md:flex md:flex-row md:items-center md:gap-16 md:px-4 md:py-4 md:rounded-md md:static md:shadow-none md:translate-y-0 md:opacity-100 transition-all duration-300 ease-in-out z-10`}
       >
         <Link
           href="/"
