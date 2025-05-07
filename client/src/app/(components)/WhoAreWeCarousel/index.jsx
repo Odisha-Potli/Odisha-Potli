@@ -4,12 +4,14 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../ProductCard";
 import axios from "axios";
 import { motion } from "framer-motion";
+import Image from "next/image"; // Import Next.js Image component
 
 const WhoAreWeShowcase = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeCategory, setActiveCategory] = useState("all");
+  const [imagesLoaded, setImagesLoaded] = useState({});
 
   const categories = [
     { id: "nuapatna-silk", name: "Nuapatna Silk" },
@@ -21,22 +23,40 @@ const WhoAreWeShowcase = () => {
     { id: "pattachitra", name: "Pattachitra" },
   ];
 
+  // Track image loading status
+  const handleImageLoad = (productId) => {
+    setImagesLoaded(prev => ({
+      ...prev,
+      [productId]: true
+    }));
+  };
+
+  // Preload images in the background
+  const preloadImages = (products) => {
+    if (!products || !Array.isArray(products)) return;
+    
+    products.forEach(product => {
+      if (product && product.images && product.images[0]) {
+        const img = new Image();
+        img.src = product.images[0].url;
+        img.onload = () => handleImageLoad(product._id);
+      }
+    });
+  };
+
   useEffect(() => {
     const fetchInitialProducts = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        // Add console log to check API URL
         console.log("API URL:", process.env.NEXT_PUBLIC_API_URL);
         
-        // Use a hardcoded fallback if env variable is not available
         const apiBaseUrl = process.env.NEXT_PUBLIC_API_URL || "https://your-api-url.com";
         
-        // Add error handling and timeout to each request
         const fetchWithTimeout = async (url) => {
           try {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+            const timeoutId = setTimeout(() => controller.abort(), 10000);
             
             const response = await axios.get(url, { 
               signal: controller.signal,
@@ -47,25 +67,21 @@ const WhoAreWeShowcase = () => {
             return response;
           } catch (err) {
             console.error(`Error fetching from ${url}:`, err);
-            // Return empty products instead of failing
             return { data: { products: [] } };
           }
         };
 
-        // Fetch products with error handling for each category
         const productPromises = categories.map((category) =>
           fetchWithTimeout(`${apiBaseUrl}/api/product/category/${category.id}/?limit=4`)
         );
         
         const responses = await Promise.all(productPromises);
         
-        // Combine all products and mark them with their category
         const fetchedProducts = [];
         responses.forEach((res, index) => {
           const categoryId = categories[index].id;
           const products = res.data?.products || [];
           
-          // Mark each product with its source category
           products.forEach(product => {
             if (product) {
               product.sourceCategory = categoryId;
@@ -74,12 +90,9 @@ const WhoAreWeShowcase = () => {
           });
         });
         
-        // Log the fetched products for debugging
         console.log("Fetched products:", fetchedProducts.length);
         
-        // If we have no products, provide fallback content
         if (fetchedProducts.length === 0) {
-          // Add sample products for demo purposes
           const sampleProducts = categories.map(category => ({
             _id: `sample-${category.id}`,
             name: `Sample ${category.name} Product`,
@@ -87,13 +100,15 @@ const WhoAreWeShowcase = () => {
             images: [{ url: '/placeholder-product.jpg' }],
             sourceCategory: category.id,
             description: `This is a sample product for ${category.name} category.`,
-            isDevelopment: true // Mark as development sample
+            isDevelopment: true
           }));
           
           setAllProducts(sampleProducts);
+          preloadImages(sampleProducts); // Preload sample images
           console.log("Using sample products due to API issues");
         } else {
           setAllProducts(fetchedProducts);
+          preloadImages(fetchedProducts); // Preload fetched images
         }
         
         setIsLoading(false);
@@ -110,17 +125,13 @@ const WhoAreWeShowcase = () => {
   // Filter products based on active category
   const displayProducts = activeCategory === "all" 
     ? allProducts 
-    : allProducts.filter((product) => {
-        // Check multiple ways a product could match a category
-        return (
-          product.sourceCategory === activeCategory || // From our added property
-          product.category === activeCategory || // Direct match
-          (product.categories && product.categories.includes(activeCategory)) || // In categories array
-          (product.categoryId === activeCategory) // By ID
-        );
-      });
+    : allProducts.filter((product) => (
+        product.sourceCategory === activeCategory || 
+        product.category === activeCategory || 
+        (product.categories && product.categories.includes(activeCategory)) || 
+        (product.categoryId === activeCategory)
+      ));
 
-  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -142,8 +153,54 @@ const WhoAreWeShowcase = () => {
     }
   };
 
-  // Limit displayed products to 4 for showcase purposes
   const limitedDisplayProducts = displayProducts.slice(0, 4);
+
+  // Create a modified ProductCard component that handles image loading properly
+  const OptimizedProductCard = ({ product }) => (
+    <div className="bg-white/90 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+      <div className="relative h-[250px] w-full bg-gray-100">
+        {product.images && product.images[0] ? (
+          <>
+            {/* Show skeleton while image is loading */}
+            {!imagesLoaded[product._id] && (
+              <div className="absolute inset-0 bg-gray-200 animate-pulse"></div>
+            )}
+            
+            {/* Use Next.js Image with priority for important images and proper sizing */}
+            <Image
+              src={product.images[0].url}
+              alt={product.name}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              className={`object-cover transition-opacity duration-300 ${
+                imagesLoaded[product._id] ? 'opacity-100' : 'opacity-0'
+              }`}
+              onLoad={() => handleImageLoad(product._id)}
+              loading="eager" // Load top-fold images eagerly
+              quality={80} // Slightly reduced quality for faster loading
+            />
+          </>
+        ) : (
+          <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+            <span className="text-gray-400">Image not available</span>
+          </div>
+        )}
+      </div>
+      
+      <div className="p-4">
+        <h3 className="text-lg font-medium text-gray-800 line-clamp-1">{product.name}</h3>
+        <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+          {product.description || `Beautiful ${product.sourceCategory?.replace('-', ' ')} product`}
+        </p>
+        <div className="mt-3 flex items-center justify-between">
+          <span className="text-[#97571c] font-semibold">₹{product.price?.toLocaleString() || 'N/A'}</span>
+          <button className="text-sm bg-[#97571c]/10 hover:bg-[#97571c]/20 text-[#97571c] py-1 px-3 rounded-full transition-colors">
+            View Details
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <section className="bg-gradient-to-b from-[#ECE5DD] to-[#ECE5DD] px-4 py-20 sm:px-6 lg:px-12 xl:px-20">
@@ -206,7 +263,6 @@ const WhoAreWeShowcase = () => {
             <p className="text-gray-600">
               We're having trouble connecting to our product catalog. Please try again later.
             </p>
-            {/* Show technical error details only in development */}
             {process.env.NODE_ENV === 'development' && (
               <p className="mt-4 text-xs text-gray-500 max-w-lg mx-auto">{error}</p>
             )}
@@ -233,9 +289,8 @@ const WhoAreWeShowcase = () => {
                 variants={itemVariants}
                 className="flex justify-center"
               >
-                {/* Add conditional rendering for Product Card */}
                 {product ? (
-                  <ProductCard product={product} />
+                  <OptimizedProductCard product={product} />
                 ) : (
                   <div className="bg-white/50 p-6 rounded-lg shadow-sm border border-gray-200 w-full">
                     <div className="h-48 bg-gray-200 rounded-md animate-pulse"></div>
