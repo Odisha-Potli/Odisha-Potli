@@ -4,6 +4,7 @@ import WhatOurCustomersHaveToSay from "./(sub-pages)/WhatOurCustomers";
 import WhoAreWe from "./(sub-pages)/WhoAreWe";
 import Form from "./(components)/Form";
 import Footer from "./(sub-pages)/Footer";
+import ProductCard from "./(components)/ProductCard";
 import StandardisationsAndAssociations from "./(sub-pages)/StdAndAss";
 import Link from "next/link";
 import WhoAreWeCarousel from "./(components)/WhoAreWeCarousel";

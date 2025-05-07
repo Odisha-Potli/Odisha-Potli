@@ -6,7 +6,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 
 const WhoAreWeShowcase = () => {
-  const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeCategory, setActiveCategory] = useState("all");
@@ -22,18 +22,33 @@ const WhoAreWeShowcase = () => {
   ];
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchInitialProducts = async () => {
       setIsLoading(true);
       setError(null);
       try {
+        // Fetch multiple products per category for better showcase
         const productPromises = categories.map((category) =>
           axios.get(
-            `${process.env.NEXT_PUBLIC_API_URL}/api/product/category/${category.id}/?limit=1`
+            `${process.env.NEXT_PUBLIC_API_URL}/api/product/category/${category.id}/?limit=4`
           )
         );
         const responses = await Promise.all(productPromises);
-        const fetchedProducts = responses.map((res) => res.data.products?.[0] || null);
-        setProducts(fetchedProducts.filter(Boolean)); // Filter out null products
+        
+        // Combine all products and mark them with their category
+        const fetchedProducts = [];
+        responses.forEach((res, index) => {
+          const categoryId = categories[index].id;
+          const products = res.data.products || [];
+          
+          // Mark each product with its source category to make filtering easier
+          products.forEach(product => {
+            // Ensure product.sourceCategory exists
+            product.sourceCategory = categoryId;
+            fetchedProducts.push(product);
+          });
+        });
+        
+        setAllProducts(fetchedProducts.filter(Boolean));
         setIsLoading(false);
       } catch (err) {
         console.error("Failed to fetch products:", err);
@@ -42,16 +57,21 @@ const WhoAreWeShowcase = () => {
       }
     };
 
-    fetchProducts();
+    fetchInitialProducts();
   }, []);
 
   // Filter products based on active category
   const displayProducts = activeCategory === "all" 
-    ? products 
-    : products.filter((product) => 
-        product.categories?.includes(activeCategory) || 
-        product.category === activeCategory
-      );
+    ? allProducts 
+    : allProducts.filter((product) => {
+        // Check multiple ways a product could match a category
+        return (
+          product.sourceCategory === activeCategory || // From our added property
+          product.category === activeCategory || // Direct match
+          product.categories?.includes(activeCategory) || // In categories array
+          (product.categoryId === activeCategory) // By ID
+        );
+      });
 
   // Animation variants
   const containerVariants = {
@@ -75,8 +95,11 @@ const WhoAreWeShowcase = () => {
     }
   };
 
+  // Limit displayed products to 4 for showcase purposes
+  const limitedDisplayProducts = displayProducts.slice(0, 4);
+
   return (
-    <section className="bg-gradient-to-b from-[#FFF5E4] to-[#fff9f0] px-4 py-20 sm:px-6 lg:px-12 xl:px-20">
+    <section className="bg-gradient-to-b from-[#ECE5DD] to-[#ECE5DD] px-4 py-20 sm:px-6 lg:px-12 xl:px-20">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
@@ -135,7 +158,7 @@ const WhoAreWeShowcase = () => {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">Oops! Something went wrong</h3>
             <p className="text-gray-600">{error}</p>
           </div>
-        ) : displayProducts.length === 0 ? (
+        ) : limitedDisplayProducts.length === 0 ? (
           <div className="text-center py-16">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
               <svg className="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -151,7 +174,7 @@ const WhoAreWeShowcase = () => {
             initial="hidden"
             animate="visible"
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-            {displayProducts.map((product, index) => (
+            {limitedDisplayProducts.map((product, index) => (
               <motion.div
                 key={product._id}
                 variants={itemVariants}
@@ -166,12 +189,12 @@ const WhoAreWeShowcase = () => {
         {/* View All Collections Button */}
         <div className="mt-12 text-center">
           <motion.a
-            href="/Shop"
+            href={activeCategory === "all" ? "/Shop" : `/Shop/category/${activeCategory}`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center justify-center px-6 py-3 bg-[#97571c] text-white font-medium rounded-md shadow-md hover:bg-[#744d20] transition-all duration-300"
           >
-            View All Collections
+            View {activeCategory === "all" ? "All Collections" : `More ${categories.find(c => c.id === activeCategory)?.name || ''}`}
             <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
             </svg>
