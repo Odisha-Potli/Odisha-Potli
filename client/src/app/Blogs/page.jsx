@@ -34,19 +34,17 @@ export default function Blogs() {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Header */}
-      <Navbar/>
+      <Navbar />
 
-      {/* Hero Section */}
-      <section className="container mx-auto mt-4">
-        <div className="relative flex flex-col md:flex-row items-start md:items-end gap-6 p-6 md:p-12">
-          <div className="flex-1 flex bg-white flex-col justify-center z-10 lg:-mr-48 lg:mt-48">
+      <section className="container mx-auto mt-4 pt-3 relative z-0">
+        <div className="relative flex flex-col md:flex-row items-start md:items-end gap-6 p-6  md:p-12">
+          <div className="flex-1 flex bg-white flex-col justify-center z-10">
             <h1 className="lg:text-8xl font-bold md:text-5xl text-black">Our Blog</h1>
             <p className="mt-4 lg:text-4xl text-gray-800">
               Research and recommendations for modern stack websites.
             </p>
           </div>
-          <div className="relative w-full md:w-[800px] h-[400px] -mt-12 md:mt-0 md:-mb-12">
+          <div className="relative w-full md:w-[800px] h-[400px]">
             <Image
               src="/horizontal_image.jpg"
               alt="Person with sparkler"
@@ -58,7 +56,6 @@ export default function Blogs() {
         </div>
       </section>
 
-      {/* Blog Cards */}
       <section className="container mx-auto px-4 py-8">
         {loading ? (
           <p className="text-gray-600 text-center">Loading blog posts...</p>

@@ -84,7 +84,7 @@ export default function ProductsPage() {
           {/* Mobile Filter Button */}
           <button
             onClick={() => setIsFilterOpen(!isFilterOpen)}
-            className="md:hidden fixed bottom-4 right-4 bg-[#97571c] text-white px-6 py-3 rounded-full shadow-lg hover:bg-[#35261b] transition-all duration-200 z-50"
+            className="md:hidden fixed bottom-4 right-4 bg-[#ECE5DD] text-white px-6 py-3 rounded-full shadow-lg hover:bg-[#35261b] transition-all duration-200 z-50"
           >
             {isFilterOpen ? "Close Filters" : "Apply Filters"}
           </button>

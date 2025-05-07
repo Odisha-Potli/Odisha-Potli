@@ -4,7 +4,8 @@ import Link from "next/link";
 
 function Footer() {
   return (
-    <div className="min-w-full bg-gradient-to-b from-amber-100 to-amber-200 text-gray-800 mt-10">
+    // <div className="min-w-full bg-gradient-to-b from-amber-100 to-amber-200 text-gray-800 mt-10">
+    <div className="min-w-full bg-gradient-to-b from-[#f3e9dd] to-[#E8D8C6] text-gray-800 mt-10">  {/* bg color  */}
       {/* Logo and Odisha Potli */}
       <div className="container mx-auto px-6 pt-8">
         <div className="flex flex-row items-center">
@@ -19,7 +20,7 @@ function Footer() {
         </div>
 
         {/* para and sections */}
-        <div className="flex lg:flex-row flex-col justify-between mt-8 border-t border-amber-300 pt-6">
+        <div className="flex lg:flex-row flex-col justify-between mt-8 pt-6">
           {/* Para */}
           <div className="lg:w-1/2 w-full lg:pl-0 pl-3 lg:pr-24 pr-3 lg:text-left text-center font-medium">
             <p className="text-lg leading-relaxed text-amber-900">
@@ -197,7 +198,7 @@ function Footer() {
         </div>
 
         {/* Call-Mail-Location */}
-        <div className="lg:text-left text-center pt-6 pb-6 border-t border-amber-300 mt-8">
+        <div className="lg:text-left text-center pt-6 pb-6  mt-8">
           <div className="flex lg:flex-row flex-col gap-4 items-center lg:items-start">
             <div className="flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-amber-800">
@@ -221,10 +222,8 @@ function Footer() {
             Made with <FilledHeart className="mx-2 text-red-500" /> from Odisha Potli
           </span>
         </div>
-
-        <hr className="border-1 border-amber-300 mx-12" />
-
-        {/* Terms and Conditions */}
+<hr className="border-0 border-amber-300 mx-12" />
+ {/* Terms and Conditions */}
         <div className="flex lg:flex-row flex-col justify-between px-4 py-6 text-sm">
           <Link href="/TermsAndConditions">
             <div className="hover:text-amber-900 transition-colors duration-300 lg:text-left text-center mb-2 lg:mb-0">Terms and Conditions</div>

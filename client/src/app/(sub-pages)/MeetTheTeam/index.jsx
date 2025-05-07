@@ -19,7 +19,7 @@ const MeetTheTeam = () => {
       },
     ];
   return (
-    <div className="min-h-screen bg-[#e6c39a] py-12 lg:px-0 px-4">
+    <div className="min-h-screen bg-[#ECE5DD] py-12 lg:px-0 px-4">
       <h1 className="text-4xl font-bold text-center mb-12 text-gray-800">
         Our Team
       </h1>

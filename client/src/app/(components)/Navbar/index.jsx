@@ -114,7 +114,7 @@ const Navbar = () => {
   }, [isShopOpen, timeoutId]);
 
   return (
-    <div className="relative flex flex-row items-center justify-between bg-[#f0dcc4] md:bg-[#f0dcc4]/80 md:backdrop-blur-sm py-4 px-6 sticky top-0 z-10 shadow-md">
+    <div className="relative flex flex-row items-center justify-between bg-[#f0dcc4] md:bg-[#E8D8C6]/80 md:backdrop-blur-sm py-4 px-6 sticky top-0 z-10 shadow-md">
       {/* Pseudo-element for pixelation effect in desktop view */}
       <style jsx>{`
         @media (min-width: 768px) {

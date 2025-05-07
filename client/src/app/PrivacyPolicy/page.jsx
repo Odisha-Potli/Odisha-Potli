@@ -2,7 +2,7 @@ import React from 'react'
 
 function PrivacyPolicy() {
   return (
-    <div className="min-h-screen w-full flex flex-col" style={{ backgroundColor: '#eca72f' }}>
+    <div className="min-h-screen w-full flex flex-col" style={{ backgroundColor: '#ECE5DD' }}>
       <div className="flex-grow w-full px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="text-3xl font-bold mb-6 text-center text-yellow-700" >Privacy Policy</h1>
 

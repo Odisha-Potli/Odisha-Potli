@@ -86,15 +86,15 @@ const SignUp = () => {
   if (!hasMounted) return null;
 
   return (
-    <div className="flex flex-col bg-[#e8c49c] h-screen lg:overflow-hidden">
+    <div className="flex flex-col bg-[#ECE5DD] h-screen lg:overflow-y-auto">
       <Navbar />
-      <div className="flex-1 bg-[#e8c49c] flex flex-col md:flex-row">
+      <div className="flex-1 bg-[#ECE5DD] flex flex-col md:flex-row">
         {/* Left Side: Image */}
-        <div className="md:w-1/2 h-1/3 md:h-full flex items-center justify-center border-r-2 border-[#97571c] p-4">
+        <div className="hidden md:flex md:w-1/2 items-center justify-center border-r-2 border-[#97571c] p-4">
           <img
-            src="/Frame_20_mobile.png"
+            src="/Frame 47469.png"
             alt="Sign Up Illustration"
-            className="w-full max-h-full object-contain rounded-lg md:max-h-[calc(100vh-80px)]"
+            className="w-full max-h-full object-contain rounded-lg md:max-h-[calc(120vh-80px)]"
           />
         </div>
 
@@ -221,7 +221,7 @@ const SignUp = () => {
                   <button
                     type="button"
                     onClick={handleBack}
-                    className="bg-[#35261b] text-white p-3 rounded text-lg hover:bg-[#97571c] transition-colors hover:shadow-lg"
+                    className="bg-[#97571c] text-white p-3 rounded text-lg hover:bg-[#97571c] transition-colors hover:shadow-lg"
                   >
                     Back
                   </button>

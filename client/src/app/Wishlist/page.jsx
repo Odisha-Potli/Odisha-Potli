@@ -11,7 +11,7 @@ export default function WishlistPage() {
   const { wishlist } = useWishlist();
 
   return (
-    <div className="flex flex-col bg-[#e8c49c] min-h-screen">
+    <div className="flex flex-col bg-[#ECE5DD] min-h-screen">
       <Navbar />
       <div className="flex-1 p-4 sm:p-6 lg:p-8">
         <div className="max-w-6xl mx-auto bg-[#f0dcc4] p-6 rounded-lg shadow-lg border-2 border-[#97571c]">

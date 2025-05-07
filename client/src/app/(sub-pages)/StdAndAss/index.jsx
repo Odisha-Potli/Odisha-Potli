@@ -8,7 +8,7 @@ function StandardisationsAndAssociations() {
   const assocImageHeight = 320;
 
   return (
-    <section className="py-20 px-6 md:px-12 lg:px-20 bg-[#e6c39a]">
+    <section className="py-20 px-6 md:px-12 lg:px-20 bg-[#ECE5DD]">
       <div className="max-w-7xl mx-auto space-y-20">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Standardisations Section */}
