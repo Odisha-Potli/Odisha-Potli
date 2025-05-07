@@ -149,7 +149,8 @@ export default function ProductCard({ product }) {
     >
       <Link href={`/Shop/product/${product._id}`}>
         <motion.div
-          className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col h-full"
+         className="bg-[#ECE5DD] rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden flex flex-col h-full"
+
           whileHover={{ y: -5 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

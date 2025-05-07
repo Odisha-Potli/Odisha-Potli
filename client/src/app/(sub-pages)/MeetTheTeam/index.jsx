@@ -25,7 +25,7 @@ const MeetTheTeam = () => {
       </h1>
 
       {/* Container with vertical line */}
-      <div className="relative max-w-4xl mx-auto bg-[#e6c39a]">
+      <div className="relative max-w-4xl mx-auto bg-[#ECE5DD]">
         {/* Dark vertical line */}
         <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gray-800 h-full"></div>
 
