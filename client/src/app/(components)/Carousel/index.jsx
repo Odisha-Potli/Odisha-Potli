@@ -80,7 +80,6 @@ const Carousel = () => {
                 </div>
               </div>
               <div className="embla__slide flex items-center justify-center">
-                <div className="embla__slide flex items-center justify-center">
                 <div className="rounded-xl overflow-hidden">
                   <Image
                     src="/Client5.jpg"
@@ -89,7 +88,6 @@ const Carousel = () => {
                     alt="Client 5"
                   />
                 </div>
-              </div>
               </div>
             </div>
           </div>
