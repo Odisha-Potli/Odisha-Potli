@@ -28,7 +28,7 @@ const WhoAreWeShowcase = () => {
       try {
         const productPromises = categories.map((category) =>
           axios.get(
-            ${process.env.NEXT_PUBLIC_API_URL}/api/product/category/${category.id}/?limit=1
+            `${process.env.NEXT_PUBLIC_API_URL}/api/product/category/${category.id}/?limit=1`
           )
         );
         const responses = await Promise.all(productPromises);
