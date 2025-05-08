@@ -46,16 +46,16 @@ const SignIn = () => {
       <Navbar />
       <div className="flex-1 bg-[#ECE5DD] flex flex-col md:flex-row items-center justify-center">
         {/* Left Side: Image (Visible only on medium and above) */}
-        <div className="hidden md:flex md:w-1/2 items-center justify-center border-r-2 border-[#97571c] p-4 mt-[-50px]">
+        <div className="hidden md:flex md:w-1/2 items-center justify-center border-r-2 border-[#97571c] p-4 mt-[-185px]">
           <img
             src="/Frame 47469.png"
             alt="Sign In Illustration"
-            className="w-full max-h-full object-contain rounded-lg md:max-h-[calc(120vh-80px)]"
+            className="w-full max-h-full object-contain rounded-lg md:max-h-[calc(180vh-135px)]"
           />
         </div>
 
         {/* Right Side: Form */}
-        <div className="w-full md:w-1/2 flex items-center justify-center p-4 mt-0 md:mt-[-130px]">
+        <div className="w-full md:w-1/2 flex items-center justify-center p-4 mt-0 md:mt-[-240px]">
           <div className="bg-[#f0dcc4] p-6 rounded-lg shadow-lg hover:shadow-2xl w-full max-w-md">
             <h1 className="text-[#97571c] text-center mb-6 text-3xl md:text-4xl font-bold">
               Sign In

@@ -90,16 +90,16 @@ const SignUp = () => {
       <Navbar />
       <div className="flex-1 bg-[#ECE5DD] flex flex-col md:flex-row">
         {/* Left Side: Image */}
-        <div className="hidden md:flex md:w-1/2 items-center justify-center border-r-2 border-[#97571c] p-4">
+        <div className="hidden md:flex md:w-1/2 items-center justify-center border-r-2 border-[#97571c] p-4 mt-[-185px]">
           <img
             src="/Frame 47469.png"
             alt="Sign Up Illustration"
-            className="w-full max-h-full object-contain rounded-lg md:max-h-[calc(120vh-80px)]"
+            className="w-full max-h-full object-contain rounded-lg md:max-h-[calc(180vh-135px)]"
           />
         </div>
 
         {/* Right Side: Form */}
-        <div className="md:w-1/2 flex items-center justify-center p-4">
+        <div className="md:w-1/2 flex items-center justify-center p-4 mt-0 md:mt-[-200px]">
           <div className="bg-[#f0dcc4] p-6 rounded-lg shadow-lg hover:shadow-2xl w-full max-w-md">
             <h1 className="text-[#97571c] text-center mb-8 text-3xl md:text-4xl font-bold">
               Sign Up
@@ -126,7 +126,7 @@ const SignUp = () => {
                     />
                   </div>
 
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-1">
                     <label
                       htmlFor="password"
                       className="text-[#97571c] font-medium"
