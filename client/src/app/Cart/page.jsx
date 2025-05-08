@@ -41,7 +41,7 @@ const CartPage = () => {
         duration: 2000,
         position: "top-right",
         style: {
-          background: "#f0dcc4",
+          background: "#ECE5DD",
           color: "#744d20",
           border: "2px solid #97571c",
         },
@@ -55,7 +55,7 @@ const CartPage = () => {
         duration: 2000,
         position: "top-right",
         style: {
-          background: "#f0dcc4",
+          background: "#ECE5DD",
           color: "#744d20",
           border: "2px solid #97571c",
         },
