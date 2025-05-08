@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoPlay from "embla-carousel-autoplay";
@@ -34,10 +33,9 @@ const Carousel = () => {
           >
             <ChevronLeft size={24} />
           </button>
-
           {/* Viewport */}
           <div
-            className="embla__viewport bg-[#ECE5DD] border lg:py-10 py-10"
+            className="embla__viewport bg-[#ECE5DD] border lg:py-4 py-4"
             ref={emblaRef}
           >
             <div className="embla__container h-full gap-10">
@@ -82,6 +80,7 @@ const Carousel = () => {
                 </div>
               </div>
               <div className="embla__slide flex items-center justify-center">
+                <div className="embla__slide flex items-center justify-center">
                 <div className="rounded-xl overflow-hidden">
                   <Image
                     src="/Client5.jpg"
@@ -91,9 +90,9 @@ const Carousel = () => {
                   />
                 </div>
               </div>
+              </div>
             </div>
           </div>
-
           {/* Right Button */}
           <button
             title="right"
