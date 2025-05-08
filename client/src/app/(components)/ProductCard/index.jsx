@@ -213,7 +213,7 @@ export default function ProductCard({ product }) {
             <div 
               className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 flex justify-center transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
             >
-              <motion.button
+              {/* <motion.button
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
@@ -225,7 +225,7 @@ export default function ProductCard({ product }) {
               >
                 <Eye size={16} />
                 Quick View
-              </motion.button>
+              </motion.button> */}
             </div>
           </div>
 
