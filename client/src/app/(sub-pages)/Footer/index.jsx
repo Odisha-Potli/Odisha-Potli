@@ -1,238 +1,440 @@
-import FilledHeart from "../../(components)/(icons)/FilledHeart";
-import React from "react";
-import Link from "next/link";
+"use client";
 
-function Footer() {
+import React, { useEffect, useState } from "react";
+import ProductCard from "../ProductCard";
+import axios from "axios";
+import { motion } from "framer-motion";
+
+const WhoAreWeShowcase = () => {
+  const [productsByCategory, setProductsByCategory] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [activeCategory, setActiveCategory] = useState("all");
+
+  // Fallback data in case the API fails
+  const fallbackProductsByCategory = {
+    "nuapatna-silk": [
+      {
+        _id: "fallback1",
+        name: "Nuapatna Silk Saree",
+        price: 12500,
+        discount: 10,
+        images: ["/images/fallback/product1.jpg"],
+        categories: ["nuapatna-silk"],
+        rating: 4.8,
+        stock: 12
+      }
+    ],
+    "sambalpuri-silk": [
+      {
+        _id: "fallback2",
+        name: "Sambalpuri Ikat Silk",
+        price: 15000,
+        discount: 5,
+        images: ["/images/fallback/product2.jpg"],
+        categories: ["sambalpuri-silk"],
+        rating: 4.9,
+        stock: 8
+      }
+    ],
+    "mens-fashion": [
+      {
+        _id: "fallback3",
+        name: "Handwoven Tussar Kurta",
+        price: 3500,
+        discount: 0,
+        images: ["/images/fallback/product3.jpg"],
+        categories: ["mens-fashion"],
+        rating: 4.7,
+        stock: 15
+      }
+    ],
+    "dupatta": [
+      {
+        _id: "fallback4",
+        name: "Hand Painted Dupatta",
+        price: 2800,
+        discount: 12,
+        images: ["/images/fallback/product4.jpg"],
+        categories: ["dupatta"],
+        rating: 4.6,
+        stock: 20
+      }
+    ],
+    "exclusive-cotton": [
+      {
+        _id: "fallback5",
+        name: "Exclusive Handloom Cotton",
+        price: 4200,
+        discount: 8,
+        images: ["/images/fallback/product5.jpg"],
+        categories: ["exclusive-cotton"],
+        rating: 4.5,
+        stock: 10
+      }
+    ],
+    "yardages": [
+      {
+        _id: "fallback6",
+        name: "Traditional Ikat Yardage",
+        price: 1800,
+        discount: 0,
+        images: ["/images/fallback/product6.jpg"],
+        categories: ["yardages"],
+        rating: 4.7,
+        stock: 25
+      }
+    ],
+    "pattachitra": [
+      {
+        _id: "fallback7",
+        name: "Pattachitra Wall Art",
+        price: 5500,
+        discount: 5,
+        images: ["/images/fallback/product7.jpg"],
+        categories: ["pattachitra"],
+        rating: 4.9,
+        stock: 5
+      }
+    ]
+  };
+
+  const categories = [
+    { id: "nuapatna-silk", name: "Nuapatna Silk" },
+    { id: "sambalpuri-silk", name: "Sambalpuri Silk" },
+    { id: "mens-fashion", name: "Men's Fashion" },
+    { id: "dupatta", name: "Dupatta" },
+    { id: "exclusive-cotton", name: "Exclusive Cotton" },
+    { id: "yardages", name: "Yardages" },
+    { id: "pattachitra", name: "Pattachitra" },
+  ];
+
+  useEffect(() => {
+    // Initialize with verified fallback data immediately to prevent rendering issues
+    const verifyFallbackData = () => {
+      const verifiedData = {};
+      categories.forEach(category => {
+        const fallbackProducts = fallbackProductsByCategory[category.id] || [];
+        // Filter invalid products
+        verifiedData[category.id] = fallbackProducts.filter(p => p && p._id);
+      });
+      return verifiedData;
+    };
+    
+    // Set initial state with verified fallback data
+    setProductsByCategory(verifyFallbackData());
+    
+    const fetchProducts = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        // Add timeout to the API calls to prevent hanging
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+        
+        const categoryData = {};
+        
+        // Pre-fill with verified fallback data
+        categories.forEach(category => {
+          const fallbackProducts = fallbackProductsByCategory[category.id] || [];
+          // Filter invalid products
+          categoryData[category.id] = fallbackProducts.filter(p => p && p._id);
+        });
+        
+        // Fetch products for each category
+        for (const category of categories) {
+          try {
+            const response = await axios.get(
+              `${process.env.NEXT_PUBLIC_API_URL}/api/product/category/${category.id}/?limit=4`,
+              { signal: controller.signal }
+            );
+            
+            const apiProducts = response.data.products || [];
+            
+            // If API returned valid products, use them; otherwise keep fallback
+            if (apiProducts && apiProducts.length > 0) {
+              // Verify each product has required fields
+              categoryData[category.id] = apiProducts.filter(product => 
+                product && typeof product === 'object' && product._id
+              );
+              
+              // Use fallback if filtered API products are empty
+              if (categoryData[category.id].length === 0) {
+                const fallbackProducts = fallbackProductsByCategory[category.id] || [];
+                categoryData[category.id] = fallbackProducts.filter(p => p && p._id);
+              }
+            }
+            
+            console.log(`Category ${category.id} has ${categoryData[category.id].length} products after fetch`);
+          } catch (err) {
+            console.error(`Failed to fetch products for ${category.id}:`, err);
+            // Keep the pre-filled fallback data for this category
+          }
+        }
+        
+        clearTimeout(timeoutId);
+        setProductsByCategory(categoryData);
+        setIsLoading(false);
+      } catch (err) {
+        console.error("Failed to fetch products:", err);
+        setError("Failed to fetch products");
+        // Keep using the pre-filled fallback data
+        setIsLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const handleRetry = () => {
+    setIsLoading(true);
+    setError(null);
+    // Add a small delay before retrying
+    setTimeout(() => {
+      // Make a deep copy of fallback products to avoid reference issues
+      const fallbackCopy = JSON.parse(JSON.stringify(fallbackProductsByCategory));
+      // Verify each product in the fallback data has required properties
+      Object.keys(fallbackCopy).forEach(category => {
+        if (Array.isArray(fallbackCopy[category])) {
+          // Filter out any products without _id
+          fallbackCopy[category] = fallbackCopy[category].filter(product => 
+            product && typeof product === 'object' && product._id
+          );
+        } else {
+          // Initialize as empty array if not an array
+          fallbackCopy[category] = [];
+        }
+      });
+      setProductsByCategory(fallbackCopy);
+      setIsLoading(false);
+    }, 1000);
+  };
+
+  // Get all products for "All Collections" view
+  const allProducts = React.useMemo(() => {
+    // Safely collect all products and filter out any undefined items
+    const products = [];
+    // Log for debugging
+    console.log("Current productsByCategory:", JSON.stringify(productsByCategory));
+    
+    try {
+      Object.entries(productsByCategory).forEach(([category, categoryProducts]) => {
+        console.log(`Processing category: ${category}, has ${Array.isArray(categoryProducts) ? categoryProducts.length : 0} products`);
+        
+        if (Array.isArray(categoryProducts)) {
+          categoryProducts.forEach((product, index) => {
+            // Verbose logging for debugging
+            if (!product) {
+              console.warn(`Found null/undefined product at index ${index} in category ${category}`);
+            } else if (!product._id) {
+              console.warn(`Product at index ${index} in category ${category} is missing _id:`, product);
+            } else {
+              // Deep clone to avoid reference issues
+              products.push({...product});
+              console.log(`Added product ${product._id} from ${category}`);
+            }
+          });
+        } else {
+          console.warn(`Category ${category} does not contain an array of products:`, categoryProducts);
+        }
+      });
+    } catch (err) {
+      console.error("Error processing products:", err);
+    }
+    
+    console.log(`Total combined products: ${products.length}`);
+    return products;
+  }, [productsByCategory]);
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  };
+  
+  // Safely get products by category
+  const renderProducts = () => {
+    try {
+      if (activeCategory === "all") {
+        return allProducts || [];
+      }
+      
+      const categoryProducts = productsByCategory[activeCategory];
+      
+      // Extra validation for products
+      if (Array.isArray(categoryProducts)) {
+        // Return only valid products
+        const validProducts = categoryProducts.filter(product => 
+          product && 
+          typeof product === 'object' && 
+          product._id
+        );
+        
+        console.log(`Category ${activeCategory}: Found ${validProducts.length} valid products out of ${categoryProducts.length}`);
+        return validProducts;
+      }
+      
+      console.warn(`Category ${activeCategory} does not contain an array of products:`, categoryProducts);
+      return [];
+    } catch (err) {
+      console.error("Error in renderProducts:", err);
+      return [];
+    }
+  };
+
   return (
-    // <div className="min-w-full bg-gradient-to-b from-amber-100 to-amber-200 text-gray-800 mt-10">
-    <div className="min-w-full bg-gradient-to-b from-[#f3e9dd] to-[#E8D8C6] text-gray-800 mt-10">  {/* bg color  */}
-      {/* Logo and Odisha Potli */}
-      <div className="container mx-auto px-6 pt-8">
-        <div className="flex flex-row items-center">
-          <Link href="/">
-            <img
-              alt="Odisha Potli Logo"
-              src="/Odisha_Potli_Logo.ico"
-              className="h-16 object-contain rounded-md shadow-sm hover:shadow-md transition-shadow duration-300"
-            />
-          </Link>
-          <div className="text-3xl font-bold ml-6 text-amber-900">Odisha Potli</div>
-        </div>
+    <section className="bg-gradient-to-b from-[#ECE5DD] to-[#ECE5DD] px-4 py-20 sm:px-6 lg:px-12 xl:px-20">
+      <div className="max-w-7xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-[#744d20] mb-4 tracking-tight">
+            Discover Our <span className="text-[#97571c]">Artisanal</span> Collections
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto text-base md:text-lg">
+            Handpicked highlights showcasing Odisha's finest heritage crafts and traditional weaves
+          </p>
+        </motion.div>
 
-        {/* para and sections */}
-        <div className="flex lg:flex-row flex-col justify-between mt-8 pt-6">
-          {/* Para */}
-          <div className="lg:w-1/2 w-full lg:pl-0 pl-3 lg:pr-24 pr-3 lg:text-left text-center font-medium">
-            <p className="text-lg leading-relaxed text-amber-900">
-              OdishaPotli is your gateway to authentic handmade sarees, crafts, and clothing from Odisha. 
-              We celebrate tradition by empowering artisans, ensuring sustainability, and offering exquisite 
-              handloom creations. Shop with us and embrace the heritage of Odisha with every purchase!
-            </p>
-          </div>
-
-          {/* Sections */}
-          <div className="flex lg:flex-row flex-col justify-between lg:gap-x-12 gap-y-6 mt-6 lg:mt-0">
-            <div className="section-1 flex flex-col">
-              <div className="pb-4 font-bold text-xl text-amber-900">Explore</div>
-              <div className="flex flex-col space-y-2">
-                <Link href="/Shop/category/mens-fashion">
-                  <div className="hover:translate-x-1 transition-transform duration-300">
-                    <button className="text-amber-800 hover:text-amber-950">Men&apos;s Fashion</button>
-                  </div>
-                </Link>
-                <Link href="/Shop/category/jewellery">
-                  <div className="hover:translate-x-1 transition-transform duration-300">
-                    <button className="text-amber-800 hover:text-amber-950">Jewellery</button>
-                  </div>
-                </Link>
-                <Link href="/Shop/category/accessories">
-                  <div className="hover:translate-x-1 transition-transform duration-300">
-                    <button className="text-amber-800 hover:text-amber-950">Accessories</button>
-                  </div>
-                </Link>
-                <Link href="/Shop/category/arts-crafts">
-                  <div className="hover:translate-x-1 transition-transform duration-300">
-                    <button className="text-amber-800 hover:text-amber-950">Art & Craft</button>
-                  </div>
-                </Link>
-                <Link href="/Shop/category/arts-crafts">
-                  <div className="hover:translate-x-1 transition-transform duration-300">
-                    <button className="text-amber-800 hover:text-amber-950">Traditional Toys</button>
-                  </div>
-                </Link>
-              </div>
-            </div>
-            <div className="section-2">
-              <div className="pb-4 font-bold text-xl text-amber-900">Community</div>
-              <div className="flex flex-col space-y-2">
-                <Link href="Blogs">
-                  <div className="hover:translate-x-1 transition-transform duration-300">
-                    <button className="text-amber-800 hover:text-amber-950">Blogs</button>
-                  </div>
-                </Link>
-                <Link href="AboutUs">
-                  <div className="hover:translate-x-1 transition-transform duration-300">
-                    <button className="text-amber-800 hover:text-amber-950">Our Team</button>
-                  </div>
-                </Link>
-              </div>
-            </div>
-            <div className="section-3">
-              <div className="pb-4 font-bold text-xl text-amber-900">About Us</div>
-              <div className="flex flex-col space-y-2">
-                <div className="hover:translate-x-1 transition-transform duration-300">
-                  <button className="text-amber-800 hover:text-amber-950">Manifesto</button>
-                </div>
-                <div className="hover:translate-x-1 transition-transform duration-300">
-                  <button className="text-amber-800 hover:text-amber-950">Partners</button>
-                </div>
-                <div className="hover:translate-x-1 transition-transform duration-300">
-                  <button className="text-amber-800 hover:text-amber-950">Standardisations</button>
-                </div>
-                <div className="hover:translate-x-1 transition-transform duration-300">
-                  <button className="text-amber-800 hover:text-amber-950">Association</button>
-                </div>
-                <Link href="/PrivacyPolicy">
-                  <div className="hover:translate-x-1 transition-transform duration-300">
-                    <button className="text-amber-800 hover:text-amber-950">Privacy Policy</button>
-                  </div>
-                </Link>
-                <Link href="/ShippingDeliveryPolicy">
-                  <div className="hover:translate-x-1 transition-transform duration-300">
-                    <button className="text-amber-800 hover:text-amber-950">Shipping & Delivery</button>
-                  </div>
-                </Link>
-                <Link href="/CookiePolicy">
-                  <div className="hover:translate-x-1 transition-transform duration-300">
-                    <button className="text-amber-800 hover:text-amber-950">Cookies Policy</button>
-                  </div>
-                </Link>
-                <Link href="/Cancellation&Refund">
-                  <div className="hover:translate-x-1 transition-transform duration-300">
-                    <button className="text-amber-800 hover:text-amber-950">Cancellation</button>
-                  </div>
-                </Link>
-              </div>
-            </div>
-            <div className="section-4 pb-6">
-              <div className="pb-4 font-bold text-xl text-amber-900">Socials</div>
-              <div className="flex lg:flex-col flex-row justify-center items-center lg:gap-y-4 gap-x-6">
-                <Link href="https://www.instagram.com/odishapotli?igsh=NmIzZ2FhcHI2YzZw">
-                  <div className="flex items-center group">
-                    <button className="flex flex-row items-center gap-3 hover:text-amber-950">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-instagram-icon lucide-instagram group-hover:scale-110 transition-transform duration-300"
-                      >
-                        <rect
-                          width="20"
-                          height="20"
-                          x="2"
-                          y="2"
-                          rx="5"
-                          ry="5"
-                        />
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-                      </svg>
-                      <span className="hidden md:block">Instagram</span>
-                    </button>
-                  </div>
-                </Link>
-                <Link href="https://www.linkedin.com/company/sarna-educational-and-cultural-services-llp/">
-                  <div className="flex items-center group">
-                    <button className="flex flex-row items-center gap-3 hover:text-amber-950">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-linkedin-icon lucide-linkedin group-hover:scale-110 transition-transform duration-300"
-                      >
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                        <rect width="4" height="12" x="2" y="9" />
-                        <circle cx="4" cy="4" r="2" />
-                      </svg>
-                      <span className="hidden md:block">LinkedIn</span>
-                    </button>
-                  </div>
-                </Link>
-                <Link href="https://www.youtube.com/@OdishaJourneys">
-                  <div className="flex items-center group">
-                    <button className="flex flex-row items-center gap-3 hover:text-amber-950">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-youtube-icon lucide-youtube group-hover:scale-110 transition-transform duration-300"
-                      >
-                        <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
-                        <path d="m10 15 5-3-5-3z" />
-                      </svg>
-                      <span className="hidden md:block">Youtube</span>
-                    </button>
-                  </div>
-                </Link>
-              </div>
-            </div>
+        {/* Category Tabs - Horizontal scrollable on mobile */}
+        <div className="mb-10 overflow-x-auto scrollbar-hide">
+          <div className="flex space-x-2 md:space-x-4 justify-start md:justify-center min-w-max pb-2">
+            <button
+              onClick={() => setActiveCategory("all")}
+              className={`px-4 py-2 rounded-full text-sm md:text-base font-medium transition-all duration-300 whitespace-nowrap
+                ${activeCategory === "all" 
+                  ? "bg-[#97571c] text-white shadow-md" 
+                  : "bg-white/80 text-[#744d20] hover:bg-white hover:shadow-sm border border-[#97571c]/20"}`}
+            >
+              All Collections
+            </button>
+            
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setActiveCategory(category.id)}
+                className={`px-4 py-2 rounded-full text-sm md:text-base font-medium transition-all duration-300 whitespace-nowrap
+                  ${activeCategory === category.id 
+                    ? "bg-[#97571c] text-white shadow-md" 
+                    : "bg-white/80 text-[#744d20] hover:bg-white hover:shadow-sm border border-[#97571c]/20"}`}
+              >
+                {category.name}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Call-Mail-Location */}
-        <div className="lg:text-left text-center pt-6 pb-6  mt-8">
-          <div className="flex lg:flex-row flex-col gap-4 items-center lg:items-start">
-            <div className="flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-amber-800">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        {isLoading ? (
+          <div className="flex flex-col items-center justify-center py-16">
+            <div className="w-12 h-12 border-4 border-[#97571c]/20 border-t-[#97571c] rounded-full animate-spin"></div>
+            <p className="mt-4 text-[#744d20] font-medium">Loading collections...</p>
+          </div>
+        ) : error ? (
+          <div className="text-center py-16">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 mb-4">
+              <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
               </svg>
-              <span className="font-medium">+917008099469 & +918144733341</span>
             </div>
-            <div className="flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 text-amber-800">
-                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-              </svg>
-              <span className="font-medium">contact@sarnaindia.in</span>
-            </div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">Oops! Something went wrong</h3>
+            <p className="text-gray-600 mb-6">We're having trouble connecting to our product catalog.</p>
+            <button 
+              onClick={handleRetry}
+              className="px-6 py-2 bg-[#97571c] text-white font-medium rounded-md shadow-md hover:bg-[#744d20] transition-all duration-300"
+            >
+              Try Again
+            </button>
           </div>
-        </div>
-
-        {/* Made with love */}
-        <div className="flex items-center justify-center pb-4">
-          <span className="flex items-center text-lg font-medium text-amber-900">
-            Made with <FilledHeart className="mx-2 text-red-500" /> from Odisha Potli
-          </span>
-        </div>
-<hr className="border-0 border-amber-300 mx-12" />
- {/* Terms and Conditions */}
-        <div className="flex lg:flex-row flex-col justify-between px-4 py-6 text-sm">
-          <Link href="/TermsAndConditions">
-            <div className="hover:text-amber-900 transition-colors duration-300 lg:text-left text-center mb-2 lg:mb-0">Terms and Conditions</div>
-          </Link>
-          <div className="text-amber-800 lg:text-right text-center">&copy; All Rights Reserved for Odisha Potli, 2025</div>
+        ) : renderProducts().length === 0 ? (
+          <div className="text-center py-16">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+              <svg className="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">No products found</h3>
+            <p className="text-gray-600">Try selecting a different category</p>
+          </div>
+        ) : (
+          // Display products with error handling
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
+          >
+            {renderProducts().map((product, index) => {
+              // Skip rendering if product is invalid
+              if (!product || !product._id) {
+                console.warn(`Invalid product at index ${index}:`, product);
+                return null;
+              }
+              
+              // Wrap in error boundary to prevent one bad product from breaking the entire list
+              try {
+                return (
+                  <motion.div
+                    key={product._id}
+                    variants={itemVariants}
+                    className="flex justify-center"
+                  >
+                    <ProductCard product={product} />
+                  </motion.div>
+                );
+              } catch (err) {
+                console.error(`Error rendering product ${product._id}:`, err);
+                return (
+                  <motion.div
+                    key={`error-${index}`}
+                    variants={itemVariants}
+                    className="flex justify-center"
+                  >
+                    <div className="w-full h-full bg-red-50 p-4 rounded-lg flex items-center justify-center text-red-500">
+                      Product display error
+                    </div>
+                  </motion.div>
+                );
+              }
+            })}
+          </motion.div>
+        )}
+        
+        {/* View All Collections Button */}
+        <div className="mt-12 text-center">
+          <motion.a
+            href="/Shop"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center justify-center px-6 py-3 bg-[#97571c] text-white font-medium rounded-md shadow-md hover:bg-[#744d20] transition-all duration-300"
+          >
+            View All Collections
+            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </motion.a>
         </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
 
-export default Footer;
+export default WhoAreWeShowcase;
