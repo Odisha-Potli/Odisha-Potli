@@ -6,98 +6,84 @@ import axios from "axios";
 import { motion } from "framer-motion";
 
 const WhoAreWeShowcase = () => {
-  const [productsByCategory, setProductsByCategory] = useState({});
+  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeCategory, setActiveCategory] = useState("all");
 
   // Fallback data in case the API fails
-  const fallbackProductsByCategory = {
-    "nuapatna-silk": [
-      {
-        _id: "fallback1",
-        name: "Nuapatna Silk Saree",
-        price: 12500,
-        discount: 10,
-        images: ["/images/fallback/product1.jpg"],
-        categories: ["nuapatna-silk"],
-        rating: 4.8,
-        stock: 12
-      }
-    ],
-    "sambalpuri-silk": [
-      {
-        _id: "fallback2",
-        name: "Sambalpuri Ikat Silk",
-        price: 15000,
-        discount: 5,
-        images: ["/images/fallback/product2.jpg"],
-        categories: ["sambalpuri-silk"],
-        rating: 4.9,
-        stock: 8
-      }
-    ],
-    "mens-fashion": [
-      {
-        _id: "fallback3",
-        name: "Handwoven Tussar Kurta",
-        price: 3500,
-        discount: 0,
-        images: ["/images/fallback/product3.jpg"],
-        categories: ["mens-fashion"],
-        rating: 4.7,
-        stock: 15
-      }
-    ],
-    "dupatta": [
-      {
-        _id: "fallback4",
-        name: "Hand Painted Dupatta",
-        price: 2800,
-        discount: 12,
-        images: ["/images/fallback/product4.jpg"],
-        categories: ["dupatta"],
-        rating: 4.6,
-        stock: 20
-      }
-    ],
-    "exclusive-cotton": [
-      {
-        _id: "fallback5",
-        name: "Exclusive Handloom Cotton",
-        price: 4200,
-        discount: 8,
-        images: ["/images/fallback/product5.jpg"],
-        categories: ["exclusive-cotton"],
-        rating: 4.5,
-        stock: 10
-      }
-    ],
-    "yardages": [
-      {
-        _id: "fallback6",
-        name: "Traditional Ikat Yardage",
-        price: 1800,
-        discount: 0,
-        images: ["/images/fallback/product6.jpg"],
-        categories: ["yardages"],
-        rating: 4.7,
-        stock: 25
-      }
-    ],
-    "pattachitra": [
-      {
-        _id: "fallback7",
-        name: "Pattachitra Wall Art",
-        price: 5500,
-        discount: 5,
-        images: ["/images/fallback/product7.jpg"],
-        categories: ["pattachitra"],
-        rating: 4.9,
-        stock: 5
-      }
-    ]
-  };
+  const fallbackProducts = [
+    {
+      _id: "fallback1",
+      name: "Nuapatna Silk Saree",
+      price: 12500,
+      discount: 10,
+      images: ["/images/fallback/product1.jpg"],
+      categories: ["nuapatna-silk"],
+      rating: 4.8,
+      stock: 12
+    },
+    {
+      _id: "fallback2",
+      name: "Sambalpuri Ikat Silk",
+      price: 15000,
+      discount: 5,
+      images: ["/images/fallback/product2.jpg"],
+      categories: ["sambalpuri-silk"],
+      rating: 4.9,
+      stock: 8
+    },
+    {
+      _id: "fallback3",
+      name: "Handwoven Tussar Kurta",
+      price: 3500,
+      discount: 0,
+      images: ["/images/fallback/product3.jpg"],
+      categories: ["mens-fashion"],
+      rating: 4.7,
+      stock: 15
+    },
+    {
+      _id: "fallback4",
+      name: "Hand Painted Dupatta",
+      price: 2800,
+      discount: 12,
+      images: ["/images/fallback/product4.jpg"],
+      categories: ["dupatta"],
+      rating: 4.6,
+      stock: 20
+    },
+    {
+      _id: "fallback5",
+      name: "Exclusive Handloom Cotton",
+      price: 4200,
+      discount: 8,
+      images: ["/images/fallback/product5.jpg"],
+      categories: ["exclusive-cotton"],
+      rating: 4.5,
+      stock: 10
+    },
+    {
+      _id: "fallback6",
+      name: "Traditional Ikat Yardage",
+      price: 1800,
+      discount: 0,
+      images: ["/images/fallback/product6.jpg"],
+      categories: ["yardages"],
+      rating: 4.7,
+      stock: 25
+    },
+    {
+      _id: "fallback7",
+      name: "Pattachitra Wall Art",
+      price: 5500,
+      discount: 5,
+      images: ["/images/fallback/product7.jpg"],
+      categories: ["pattachitra"],
+      rating: 4.9,
+      stock: 5
+    }
+  ];
 
   const categories = [
     { id: "nuapatna-silk", name: "Nuapatna Silk" },
@@ -118,36 +104,31 @@ const WhoAreWeShowcase = () => {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
         
-        const categoryData = {};
+        const productPromises = categories.map((category) =>
+          axios.get(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/product/category/${category.id}/?limit=1`,
+            { signal: controller.signal }
+          )
+        );
         
-        // Fetch products for each category
-        for (const category of categories) {
-          try {
-            const response = await axios.get(
-              `${process.env.NEXT_PUBLIC_API_URL}/api/product/category/${category.id}/?limit=4`,
-              { signal: controller.signal }
-            );
-            
-            categoryData[category.id] = response.data.products || [];
-            
-            // If no products were returned for this category, use fallback
-            if (!categoryData[category.id] || categoryData[category.id].length === 0) {
-              categoryData[category.id] = fallbackProductsByCategory[category.id] || [];
-            }
-          } catch (err) {
-            console.error(`Failed to fetch products for ${category.id}:`, err);
-            categoryData[category.id] = fallbackProductsByCategory[category.id] || [];
-          }
-        }
-        
+        const responses = await Promise.all(productPromises);
         clearTimeout(timeoutId);
-        setProductsByCategory(categoryData);
+        
+        const fetchedProducts = responses.map((res) => res.data.products?.[0] || null);
+        const validProducts = fetchedProducts.filter(Boolean);
+        
+        if (validProducts.length === 0) {
+          // If no products were returned, use fallback data
+          setProducts(fallbackProducts);
+        } else {
+          setProducts(validProducts);
+        }
         setIsLoading(false);
       } catch (err) {
         console.error("Failed to fetch products:", err);
         setError("Failed to fetch products");
         // Use fallback data when API fails
-        setProductsByCategory(fallbackProductsByCategory);
+        setProducts(fallbackProducts);
         setIsLoading(false);
       }
     };
@@ -158,17 +139,22 @@ const WhoAreWeShowcase = () => {
   const handleRetry = () => {
     setIsLoading(true);
     setError(null);
-    setProductsByCategory({});
+    setProducts([]);
     // Add a small delay before retrying
     setTimeout(() => {
-      // Use fallback products directly for now
-      setProductsByCategory(fallbackProductsByCategory);
+      // Just use fallback products directly for now
+      setProducts(fallbackProducts);
       setIsLoading(false);
     }, 1000);
   };
 
-  // Get all products for "All Collections" view
-  const allProducts = Object.values(productsByCategory).flat();
+  // Filter products based on active category
+  const displayProducts = activeCategory === "all" 
+    ? products 
+    : products.filter((product) => 
+        product.categories?.includes(activeCategory) || 
+        product.category === activeCategory
+      );
 
   // Animation variants
   const containerVariants = {
@@ -190,13 +176,6 @@ const WhoAreWeShowcase = () => {
         duration: 0.5
       }
     }
-  };
-
-  const renderProducts = () => {
-    if (activeCategory === "all") {
-      return allProducts;
-    }
-    return productsByCategory[activeCategory] || [];
   };
 
   return (
@@ -265,7 +244,7 @@ const WhoAreWeShowcase = () => {
               Try Again
             </button>
           </div>
-        ) : renderProducts().length === 0 ? (
+        ) : displayProducts.length === 0 ? (
           <div className="text-center py-16">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
               <svg className="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -275,33 +254,13 @@ const WhoAreWeShowcase = () => {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">No products found</h3>
             <p className="text-gray-600">Try selecting a different category</p>
           </div>
-        ) : activeCategory === "all" ? (
-          // Display all collections in a grid layout (keeping original layout)
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
-          >
-            {allProducts.map((product) => (
-              <motion.div
-                key={product._id}
-                variants={itemVariants}
-                className="flex justify-center"
-              >
-                <ProductCard product={product} />
-              </motion.div>
-            ))}
-          </motion.div>
         ) : (
-          // Display selected category products
           <motion.div 
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
-          >
-            {renderProducts().map((product) => (
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+            {displayProducts.map((product, index) => (
               <motion.div
                 key={product._id}
                 variants={itemVariants}
