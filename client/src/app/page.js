@@ -77,17 +77,21 @@ export default function Home() {
       </section>
 
       {/* Carousel and Sections */}
+
       <WhoAreWeCarousel />
 
-      <hr />
+<hr />
 
-      <WhatOurCustomersHaveToSay />
+<WhatOurCustomersHaveToSay />
 
-      <StandardisationsAndAssociations />
+{/* <div className="-mt-20"> */}
+ <StandardisationsAndAssociations />
+ {/* </div> */}
 
       {/* Contact Section */}
-      <div className="flex flex-row justify-center items-center font-bold">
-        <div className="text-[4vw] text-black">
+      
+      <div className="flex justify-center font-bold mb-2">
+        <div className="text-[6vw] sm:text-[5vw] md:text-[4vw] lg:text-[2.5rem] text-black">
           <span className="text-[#97571c]">Contact</span> Us
         </div>
       </div>

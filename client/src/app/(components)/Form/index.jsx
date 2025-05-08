@@ -57,11 +57,11 @@ const Form = () => {
   };
 
   return (
-    <div className="w-full bg-[#ECE5DD] py-16">
+    <div className="w-full bg-[#ECE5DD] pt-4 pb-16">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <div className="text-center mb-">
          
-          <p className="text-amber-900 max-w-3xl mx-auto text-lg">
+          <p className="text-amber-900 max-w-3xl mx-auto text-lg pb-4">
             Have questions about our handcrafted products or artisans? We'd love to hear from you. 
             Fill out the form below and our team will get back to you shortly.
           </p>

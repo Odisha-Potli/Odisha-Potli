@@ -168,7 +168,20 @@ const WhoAreWeShowcase = () => {
   };
 
   // Get all products for "All Collections" view
-  const allProducts = Object.values(productsByCategory).flat();
+  const allProducts = React.useMemo(() => {
+    // Safely collect all products and filter out any undefined items
+    const products = [];
+    Object.values(productsByCategory).forEach(categoryProducts => {
+      if (Array.isArray(categoryProducts)) {
+        categoryProducts.forEach(product => {
+          if (product && product._id) {
+            products.push(product);
+          }
+        });
+      }
+    });
+    return products;
+  }, [productsByCategory]);
 
   // Animation variants
   const containerVariants = {
@@ -192,12 +205,15 @@ const WhoAreWeShowcase = () => {
     }
   };
   
-
+  // Safely get products by category
   const renderProducts = () => {
     if (activeCategory === "all") {
       return allProducts;
     }
-    return productsByCategory[activeCategory] || [];
+    
+    const categoryProducts = productsByCategory[activeCategory];
+    // Return empty array if no products found for this category
+    return Array.isArray(categoryProducts) ? categoryProducts : [];
   };
 
   return (
@@ -276,41 +292,28 @@ const WhoAreWeShowcase = () => {
             <h3 className="text-xl font-semibold text-gray-800 mb-2">No products found</h3>
             <p className="text-gray-600">Try selecting a different category</p>
           </div>
-        ) : activeCategory === "all" ? (
-          // Display all collections in a grid layout (keeping original layout)
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
-          >
-            {allProducts.map((product) => (
-              <motion.div
-                key={product._id}
-                variants={itemVariants}
-                className="flex justify-center"
-              >
-                <ProductCard product={product} />
-              </motion.div>
-            ))}
-          </motion.div>
         ) : (
-          // Display selected category products
+          // Display products with error handling
           <motion.div 
             variants={containerVariants}
             initial="hidden"
             animate="visible"
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
           >
-            {renderProducts().map((product) => (
-              <motion.div
-                key={product._id}
-                variants={itemVariants}
-                className="flex justify-center"
-              >
-                <ProductCard product={product} />
-              </motion.div>
-            ))}
+            {renderProducts().map((product) => {
+              // Skip rendering if product is invalid
+              if (!product || !product._id) return null;
+              
+              return (
+                <motion.div
+                  key={product._id}
+                  variants={itemVariants}
+                  className="flex justify-center"
+                >
+                  <ProductCard product={product} />
+                </motion.div>
+              );
+            })}
           </motion.div>
         )}
         
