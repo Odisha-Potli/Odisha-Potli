@@ -84,7 +84,7 @@ const CartPage = () => {
   };
 
   return (
-    <div className="flex flex-col bg-[#e8c49c] min-h-screen">
+    <div className="flex flex-col bg-[#ECE5DD] min-h-screen">
       <Navbar />
       <div className="flex-1 p-4 sm:p-6 lg:p-8">
         <div className="max-w-6xl mx-auto bg-[#f0dcc4] p-6 rounded-lg shadow-lg border-2 border-[#97571c]">
@@ -108,7 +108,7 @@ const CartPage = () => {
                   return (
                     <div
                       key={item._id}
-                      className="bg-[#f0dcc4] p-4 rounded-lg shadow-md border-2 border-[#97571c] flex flex-col sm:flex-row items-center gap-4"
+                      className="bg-[#ECE5DD ] p-4 rounded-lg shadow-md border-2 border-[#97571c] flex flex-col sm:flex-row items-center gap-4"
                     >
                       <Link href={`/products/${item._id}`}>
                         {item.productId && item.productId.images ? (
