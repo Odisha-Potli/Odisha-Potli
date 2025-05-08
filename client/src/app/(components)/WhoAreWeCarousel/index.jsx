@@ -276,52 +276,23 @@ const WhoAreWeShowcase = () => {
             <p className="text-gray-600">Try selecting a different category</p>
           </div>
         ) : activeCategory === "all" ? (
-          // Display all categories with their respective products
-          <div className="space-y-16">
-            {categories.map((category) => {
-              const categoryProducts = productsByCategory[category.id] || [];
-              if (categoryProducts.length === 0) return null;
-              
-              return (
-                <div key={category.id} className="category-section">
-                  <h3 className="text-2xl font-semibold text-[#744d20] mb-6 pl-2 border-l-4 border-[#97571c]">
-                    {category.name}
-                  </h3>
-                  
-                  <motion.div 
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
-                  >
-                    {categoryProducts.slice(0, 4).map((product) => (
-                      <motion.div
-                        key={product._id}
-                        variants={itemVariants}
-                        className="flex justify-center"
-                      >
-                        <ProductCard product={product} />
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                  
-                  {categoryProducts.length > 4 && (
-                    <div className="mt-6 text-right">
-                      <button
-                        onClick={() => setActiveCategory(category.id)}
-                        className="inline-flex items-center text-[#97571c] hover:text-[#744d20] font-medium transition-all duration-300"
-                      >
-                        See more {category.name}
-                        <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                      </button>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+          // Display all collections in a grid layout (keeping original layout)
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8"
+          >
+            {allProducts.map((product) => (
+              <motion.div
+                key={product._id}
+                variants={itemVariants}
+                className="flex justify-center"
+              >
+                <ProductCard product={product} />
+              </motion.div>
+            ))}
+          </motion.div>
         ) : (
           // Display selected category products
           <motion.div 
