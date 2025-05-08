@@ -96,7 +96,7 @@ export default function CategoryPage() {
     <div className="bg-[#f0dcc4]">
       <Navbar />
       <div>
-        <div className="min-h-screen flex flex-col md:flex-row bg-[#f0dcc4]">
+        <div className="min-h-screen flex flex-col md:flex-row bg-[#ECE5DD]">
           {/* Mobile Filter Button */}
           <button
             onClick={() => setIsFilterOpen(!isFilterOpen)}
@@ -111,7 +111,7 @@ export default function CategoryPage() {
               isFilterOpen
                 ? "fixed top-16 left-0 right-0 bottom-0 z-40 bg-[#f0dcc4] p-6 pt-8 mt-6 overflow-y-auto"
                 : "hidden"
-            } md:block w-full md:w-72 p-6 shadow-2xl bg-[#f0dcc4] md:fixed md:top-[7rem] md:h-[calc(100vh - 7rem)]`}
+            } md:block w-full md:w-72 p-6 shadow-2xl bg-[#ECE5DD] md:fixed md:top-[7rem] md:h-[calc(100vh - 7rem)]`}
           >
             <h2 className="text-3xl font-bold text-[#97571c] mb-6">Filters</h2>
 
@@ -321,7 +321,7 @@ export default function CategoryPage() {
           </aside>
 
           {/* Product Grid */}
-          <main className="flex-1 p-6 bg-[#f0dcc4] md:ml-[18rem]">
+          <main className="flex-1 p-6 bg-[#ECE5DD] md:ml-[18rem]">
             <div className="flex md:flex-row flex-col justify-between items-center mb-6">
               <h1 className="text-3xl font-bold text-[#97571c]">
                 {params.categoryId.charAt(0).toUpperCase() +

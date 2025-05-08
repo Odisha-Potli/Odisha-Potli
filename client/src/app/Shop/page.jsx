@@ -77,14 +77,14 @@ export default function ProductsPage() {
   const [minPrice, maxPrice] = data ? getPriceRange(data) : [0, 600];
 
   return (
-    <div className="bg-[#f0dcc4]">
+    <div className="bg-[#ECE5DD]">
       <Navbar />
-      <div>
-        <div className="min-h-screen flex flex-col md:flex-row bg-[f0dcc4]">
+      <div className="bg-[#ECE5DD]">
+        <div className="min-h-screen flex flex-col md:flex-row bg-[#ECE5DD]">
           {/* Mobile Filter Button */}
           <button
             onClick={() => setIsFilterOpen(!isFilterOpen)}
-            className="md:hidden fixed bottom-4 right-4 bg-[#ECE5DD] text-white px-6 py-3 rounded-full shadow-lg hover:bg-[#35261b] transition-all duration-200 z-50"
+            className="md:hidden fixed bottom-4 right-4 bg-[#97571c] text-white px-6 py-3 rounded-full shadow-lg hover:bg-[#35261b] transition-all duration-200 z-50"
           >
             {isFilterOpen ? "Close Filters" : "Apply Filters"}
           </button>
@@ -93,9 +93,9 @@ export default function ProductsPage() {
           <aside
             className={`${
               isFilterOpen
-                ? "fixed top-16 left-0 right-0 bottom-0 z-40 bg-[#f0dcc4] p-6 pt-8 mt-6 overflow-y-auto" // Adjusted for navbar height
+                ? "fixed top-16 left-0 right-0 bottom-0 z-40 bg-[#ECE5DD] p-6 pt-8 mt-6 overflow-y-auto"
                 : "hidden"
-            } md:block w-full md:w-72 p-6 shadow-2xl bg-[#f0dcc4] md:fixed md:top-[7rem] md:h-[calc(100vh - 7rem)] `}
+            } md:block w-full md:w-72 p-6 shadow-2xl bg-[#ECE5DD] md:fixed md:top-[7rem] md:h-[calc(100vh - 7rem)]`}
           >
             <h2 className="text-3xl font-bold text-[#97571c] mb-6">Filters</h2>
 
@@ -196,14 +196,14 @@ export default function ProductsPage() {
                   className="hidden"
                 />
                 <span className="relative block w-10 h-10 bg-[#97571c] rounded-full shadow-lg cursor-pointer transition-all duration-200 hover:shadow-xl active:scale-90">
-                  <span className="absolute top-1/2 left-0 right-0 w-6 h-6 mx-auto bg-[#f0dcc4] rounded-full shadow-inner transform -translate-y-1/2 transition-all duration-200 hover:w-5 hover:h-5"></span>
+                  <span className="absolute top-1/2 left-0 right-0 w-6 h-6 mx-auto bg-[#ECE5DD] rounded-full shadow-inner transform -translate-y-1/2 transition-all duration-200 hover:w-5 hover:h-5"></span>
                   <span className="tick_mark absolute top-[-1px] left-[-2px] w-6 h-6 transform rotate-[-40deg]">
-                    <span className="absolute left-0 bottom-0 w-1 h-3 bg-[#f0dcc4] rounded opacity-0 transition-all duration-200"></span>
-                    <span className="absolute left-0 bottom-0 w-6 h-1 bg-[#f0dcc4] rounded opacity-0 transition-all duration-200"></span>
+                    <span className="absolute left-0 bottom-0 w-1 h-3 bg-[#ECE5DD] rounded opacity-0 transition-all duration-200"></span>
+                    <span className="absolute left-0 bottom-0 w-6 h-1 bg-[#ECE5DD] rounded opacity-0 transition-all duration-200"></span>
                   </span>
                 </span>
                 <span className="ml-3 text-gray-800 font-medium">
-                  Popularity
+                  Populari
                 </span>
               </label>
 
@@ -220,10 +220,10 @@ export default function ProductsPage() {
                   className="hidden"
                 />
                 <span className="relative block w-10 h-10 bg-[#97571c] rounded-full shadow-lg cursor-pointer transition-all duration-200 hover:shadow-xl active:scale-90">
-                  <span className="absolute top-1/2 left-0 right-0 w-6 h-6 mx-auto bg-[#f0dcc4] rounded-full shadow-inner transform -translate-y-1/2 transition-all duration-200 hover:w-5 hover:h-5"></span>
+                  <span className="absolute top-1/2 left-0 right-0 w-6 h-6 mx-auto bg-[#ECE5DD] rounded-full shadow-inner transform -translate-y-1/2 transition-all duration-200 hover:w-5 hover:h-5"></span>
                   <span className="tick_mark absolute top-[-1px] left-[-2px] w-6 h-6 transform rotate-[-40deg]">
-                    <span className="absolute left-0 bottom-0 w-1 h-3 bg-[#f0dcc4] rounded opacity-0 transition-all duration-200"></span>
-                    <span className="absolute left-0 bottom-0 w-6 h-1 bg-[#f0dcc4] rounded opacity-0 transition-all duration-200"></span>
+                    <span className="absolute left-0 bottom-0 w-1 h-3 bg-[#ECE5DD] rounded opacity-0 transition-all duration-200"></span>
+                    <span className="absolute left-0 bottom-0 w-6 h-1 bg-[#ECE5DD] rounded opacity-0 transition-all duration-200"></span>
                   </span>
                 </span>
                 <span className="ml-3 text-gray-800 font-medium">
@@ -244,10 +244,10 @@ export default function ProductsPage() {
                   className="hidden"
                 />
                 <span className="relative block w-10 h-10 bg-[#97571c] rounded-full shadow-lg cursor-pointer transition-all duration-200 hover:shadow-xl active:scale-90">
-                  <span className="absolute top-1/2 left-0 right-0 w-6 h-6 mx-auto bg-[#f0dcc4] rounded-full shadow-inner transform -translate-y-1/2 transition-all duration-200 hover:w-5 hover:h-5"></span>
+                  <span className="absolute top-1/2 left-0 right-0 w-6 h-6 mx-auto bg-[#ECE5DD] rounded-full shadow-inner transform -translate-y-1/2 transition-all duration-200 hover:w-5 hover:h-5"></span>
                   <span className="tick_mark absolute top-[-1px] left-[-2px] w-6 h-6 transform rotate-[-40deg]">
-                    <span className="absolute left-0 bottom-0 w-1 h-3 bg-[#f0dcc4] rounded opacity-0 transition-all duration-200"></span>
-                    <span className="absolute left-0 bottom-0 w-6 h-1 bg-[#f0dcc4] rounded opacity-0 transition-all duration-200"></span>
+                    <span className="absolute left-0 bottom-0 w-1 h-3 bg-[#ECE5DD] rounded opacity-0 transition-all duration-200"></span>
+                    <span className="absolute left-0 bottom-0 w-6 h-1 bg-[#ECE5DD] rounded opacity-0 transition-all duration-200"></span>
                   </span>
                 </span>
                 <span className="ml-3 text-gray-800 font-medium">
@@ -301,7 +301,7 @@ export default function ProductsPage() {
           </aside>
 
           {/* Product Grid */}
-          <main className="flex-1 p-6 bg-[#f0dcc4] md:ml-[18rem]">
+          <main className="flex-1 p-6 bg-[#ECE5DD] md:ml-[18rem]">
             <div className="flex md:flex-row flex-col justify-between items-center mb-6">
               <h1 className="text-3xl font-bold text-[#97571c]">
                 Our Products

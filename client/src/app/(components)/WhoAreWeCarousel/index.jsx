@@ -191,6 +191,7 @@ const WhoAreWeShowcase = () => {
       }
     }
   };
+  
 
   const renderProducts = () => {
     if (activeCategory === "all") {

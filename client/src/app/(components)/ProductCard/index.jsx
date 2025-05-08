@@ -193,7 +193,7 @@ export default function ProductCard({ product }) {
             {/* Wishlist Button */}
             <motion.button
               onClick={handleWishlistToggle}
-              className="absolute top-3 right-3 bg-white/90 hover:bg-white p-1.5 rounded-full shadow-sm z-10"
+              className="absolute top-3 right-3 bg-white/90 hover:bg-white p-1.5 rounded-full shadow-sm z-0"
               whileTap={{ scale: 0.9 }}
             >
               {isInWishlist ? (

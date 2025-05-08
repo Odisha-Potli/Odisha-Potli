@@ -80,8 +80,8 @@ export default function NewArrivalsPage() {
     <div className="bg-[#f0dcc4]">
       <Navbar />
       <div>
-        <div className="min-h-screen flex flex-col md:flex-row bg-[#f0dcc4]">
-          {/* Mobile Filter Button */}
+        <div className="min-h-screen flex flex-col md:flex-row bg-[#ECE5DD]"> 
+          {/* Mobile Filter Button  */}
           <button
             onClick={() => setIsFilterOpen(!isFilterOpen)}
             className="md:hidden fixed bottom-4 right-4 bg-[#97571c] text-white px-6 py-3 rounded-full shadow-lg hover:bg-[#35261b] transition-all duration-200 z-50"
@@ -93,9 +93,9 @@ export default function NewArrivalsPage() {
           <aside
             className={`${
               isFilterOpen
-                ? "fixed top-16 left-0 right-0 bottom-0 z-40 bg-[#f0dcc4] p-6 pt-8 mt-6 overflow-y-auto"
+                ? "fixed top-16 left-0 right-0 bottom-0 z-40 bg-[#ECE5DD] p-6 pt-8 mt-6 overflow-y-auto"
                 : "hidden"
-            } md:block w-full md:w-72 p-6 shadow-2xl bg-[#f0dcc4] md:fixed md:top-[7rem] md:h-[calc(100vh - 7rem)]`}
+            } md:block w-full md:w-72 p-6 shadow-2xl bg-[#ECE5DD] md:fixed md:top-[7rem] md:h-[calc(100vh - 7rem)]`}
           >
             <h2 className="text-3xl font-bold text-[#97571c] mb-6">Filters</h2>
 
@@ -301,7 +301,7 @@ export default function NewArrivalsPage() {
           </aside>
 
           {/* Product Grid */}
-          <main className="flex-1 p-6 bg-[#f0dcc4] md:ml-[18rem]">
+          <main className="flex-1 p-6 bg-[#ECE5DD] md:ml-[18rem]">
             <div className="flex md:flex-row flex-col justify-between items-center mb-6">
               <h1 className="text-3xl font-bold text-[#97571c]">
                 New Arrivals
