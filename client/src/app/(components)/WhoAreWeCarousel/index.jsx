@@ -52,8 +52,8 @@ const WhoAreWeShowcase = () => {
     "dupatta": [
       {
         _id: "fallback4",
-        name: "Hand Painted Dupatta",
-        price: 2800,
+        name: "Tussar Gicha Dupatta",
+        price: 2799,
         discount: 12,
         images: ["/images/fallback/product4.jpg"],
         categories: ["dupatta"],
