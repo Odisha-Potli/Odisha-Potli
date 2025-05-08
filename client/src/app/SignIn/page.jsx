@@ -55,7 +55,7 @@ const SignIn = () => {
         </div>
 
         {/* Right Side: Form */}
-        <div className="w-full md:w-1/2 flex items-center justify-center p-4 mt-0 md:mt-[-240px]">
+        <div className="w-full md:w-1/2 flex items-center justify-center p-4 mt-0 md:mt-[-270px]">
           <div className="bg-[#f0dcc4] p-6 rounded-lg shadow-lg hover:shadow-2xl w-full max-w-md">
             <h1 className="text-[#97571c] text-center mb-6 text-3xl md:text-4xl font-bold">
               Sign In
