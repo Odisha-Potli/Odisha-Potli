@@ -103,10 +103,10 @@ const WhoAreWeShowcase = () => {
     { id: "nuapatna-silk", name: "Nuapatna Silk" },
     { id: "sambalpuri-silk", name: "Sambalpuri Silk" },
     { id: "mens-fashion", name: "Men's Fashion" },
-    { id: "dupatta", name: "Dupatta" },
-    { id: "exclusive-cotton", name: "Exclusive Cotton" },
-    { id: "yardages", name: "Yardages" },
-    { id: "pattachitra", name: "Pattachitra" },
+    // { id: "dupatta", name: "Dupatta" },
+    // { id: "exclusive-cotton", name: "Exclusive Cotton" },
+    // { id: "yardages", name: "Yardages" },
+    // { id: "pattachitra", name: "Pattachitra" },
   ];
 
   useEffect(() => {
