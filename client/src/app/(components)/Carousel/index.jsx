@@ -1,14 +1,39 @@
 "use client";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoPlay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
 const Carousel = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
-    AutoPlay({ delay: 4000 }),
-  ]);
+  // Create autoplay plugin instance with stop on interaction set to false
+  // to ensure it continues to play on all devices/screen sizes
+  const autoplay = AutoPlay({ 
+    delay: 4000,
+    stopOnInteraction: false, // prevents stopping on user interaction
+    playOnInit: true // ensures autoplay starts immediately
+  });
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { 
+      loop: true,
+      draggable: true, // ensure draggable on mobile
+      dragFree: false
+    }, 
+    [autoplay]
+  );
+
+  // Ensure carousel resets and works on window resize
+  useEffect(() => {
+    if (emblaApi) {
+      const onResize = () => {
+        emblaApi.reInit();
+      };
+      
+      window.addEventListener('resize', onResize);
+      return () => window.removeEventListener('resize', onResize);
+    }
+  }, [emblaApi]);
 
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -35,21 +60,22 @@ const Carousel = () => {
           </button>
           {/* Viewport */}
           <div
-            className="embla__viewport bg-[#ECE5DD] border lg:py-6 py-6"
+            className="embla__viewport bg-[#ECE5DD] border lg:py-6 py-6 overflow-hidden"
             ref={emblaRef}
           >
-            <div className="embla__container h-full gap-10">
-              <div className="embla__slide flex items-center justify-center ml-10">
+            <div className="embla__container h-full gap-10 flex">
+              <div className="embla__slide flex-shrink-0 flex items-center justify-center ml-10 min-w-0">
                 <div className="rounded-xl overflow-hidden">
                   <Image
                     src="/Client1.jpeg"
                     width={imageWidth}
                     height={imageHeight}
                     alt="Client 1"
+                    priority
                   />
                 </div>
               </div>
-              <div className="embla__slide flex items-center justify-center">
+              <div className="embla__slide flex-shrink-0 flex items-center justify-center min-w-0">
                 <div className="rounded-xl overflow-hidden">
                   <Image
                     src="/Client2.jpeg"
@@ -59,7 +85,7 @@ const Carousel = () => {
                   />
                 </div>
               </div>
-              <div className="embla__slide flex items-center justify-center">
+              <div className="embla__slide flex-shrink-0 flex items-center justify-center min-w-0">
                 <div className="rounded-xl overflow-hidden">
                   <Image
                     src="/Client3.jpeg"
@@ -69,7 +95,7 @@ const Carousel = () => {
                   />
                 </div>
               </div>
-              <div className="embla__slide flex items-center justify-center">
+              <div className="embla__slide flex-shrink-0 flex items-center justify-center min-w-0">
                 <div className="rounded-xl overflow-hidden">
                   <Image
                     src="/Client4.jpg"
@@ -79,7 +105,7 @@ const Carousel = () => {
                   />
                 </div>
               </div>
-              <div className="embla__slide flex items-center justify-center">
+              <div className="embla__slide flex-shrink-0 flex items-center justify-center min-w-0">
                 <div className="rounded-xl overflow-hidden">
                   <Image
                     src="/Client5.jpg"
