@@ -174,11 +174,17 @@ export default function ProductCard({ product }) {
 
             {/* Out of Stock Overlay */}
             {currentStock === 0 && (
-              <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px] flex items-center justify-center">
-                <span className="bg-[#E8D8C6] text-white text-sm px-4 py-2 rounded-md shadow-md uppercase tracking-wider font-medium">
-                  Out of Stock
-                </span>
-              </div>
+              // <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px] flex items-center justify-center">
+              //   <span className="bg-[#97571c] text-white text-sm px-4 py-2 rounded-md shadow-md uppercase tracking-wider font-medium">
+              //     Out of Stock
+              //   </span>
+              // </div>
+              <div className="absolute inset-0 bg-white text-[#97571c] backdrop-blur-[1px] flex items-center justify-center">
+  <span className="bg-white text-[#97571c] text-sm px-4 py-2 rounded-md shadow-md uppercase tracking-wider font-medium">
+    Out of Stock
+  </span>
+</div>
+
             )}
 
             {/* Discount Tag */}
