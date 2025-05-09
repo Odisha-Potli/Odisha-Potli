@@ -38,28 +38,32 @@ export default function ProductGrid() {
 
   return (
     <div className="py-10 px-4 font-sans">
-      <h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
-        Handcrafted Dresses
-      </h2>
-      <p className="text-center text-sm text-gray-500 mb-6">View all</p>
+      {/* Heading with custom text color */}
+      <div className="py-4 text-center">
+        <h2
+          className="text-2xl font-semibold"
+          style={{ color: "#97571c" }} // <-- Replace with your preferred hex code
+        >
+          Handcrafted Dresses
+        </h2>
+        <p className="text-sm text-gray-600 mt-1">View all</p>
+      </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
         {products.map((product, index) => (
           <div key={index}>
-            {/* Card with only the image */}
-            <div className="bg-white rounded-md border shadow-sm overflow-hidden transition-transform duration-300 hover:scale-105">
-              <Link href={product.productLink}>
-                <Image
-                  src={product.imageUrl}
-                  alt={product.productName}
-                  width={400}
-                  height={500}
-                  className="object-cover w-full h-[260px] md:h-[500px]"
-                />
-              </Link>
-            </div>
+            {/* Clean image card with no shadow or border */}
+            <Link href={product.productLink}>
+              <Image
+                src={product.imageUrl}
+                alt={product.productName}
+                width={400}
+                height={500}
+                className="object-cover w-full h-[260px] md:h-[500px] transition-transform duration-300 hover:scale-105"
+              />
+            </Link>
 
-            {/* Product name outside the card */}
+            {/* Product name below the image */}
             <p className="mt-2 text-sm md:text-lg font-medium text-gray-800 text-center truncate">
               {product.productName}
             </p>
