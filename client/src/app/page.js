@@ -88,7 +88,7 @@ export default function Home() {
  {/* textColor="#97571c" */}
 <ProductGrid />
     <ArtAndCraft />
-{/* <VideoImageCarousel /> */}
+<VideoImageCarousel />
 
 <WhatOurCustomersHaveToSay />
 
