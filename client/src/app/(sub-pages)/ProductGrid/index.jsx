@@ -43,27 +43,26 @@ export default function ProductGrid() {
       </h2>
       <p className="text-center text-sm text-gray-500 mb-6">View all</p>
 
-      {/* Grid Layout */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
         {products.map((product, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-md border shadow-sm overflow-hidden transition-transform duration-300 hover:scale-105"
-          >
-            <Link href={product.productLink}>
-              <Image
-                src={product.imageUrl}
-                alt={product.productName}
-                width={400}
-                height={500}
-                className="object-cover w-full h-[260px] md:h-[500px]"
-              />
-            </Link>
-            <div className="p-2 md:p-4">
-              <p className="text-sm md:text-lg font-medium text-gray-800 text-center truncate">
-                {product.productName}
-              </p>
+          <div key={index}>
+            {/* Card with only the image */}
+            <div className="bg-white rounded-md border shadow-sm overflow-hidden transition-transform duration-300 hover:scale-105">
+              <Link href={product.productLink}>
+                <Image
+                  src={product.imageUrl}
+                  alt={product.productName}
+                  width={400}
+                  height={500}
+                  className="object-cover w-full h-[260px] md:h-[500px]"
+                />
+              </Link>
             </div>
+
+            {/* Product name outside the card */}
+            <p className="mt-2 text-sm md:text-lg font-medium text-gray-800 text-center truncate">
+              {product.productName}
+            </p>
           </div>
         ))}
       </div>
