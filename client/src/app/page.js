@@ -84,9 +84,9 @@ export default function Home() {
       <WhoAreWeCarousel />
 
 <hr />
-
+ {/* textColor="#97571c" */}
 <ProductGrid />
-<VideoImageCarousel textColor="#97571c" />
+<VideoImageCarousel />
 
 <WhatOurCustomersHaveToSay />
 
