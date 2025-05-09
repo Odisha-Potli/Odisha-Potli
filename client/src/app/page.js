@@ -6,6 +6,7 @@ import Form from "./(components)/Form";
 import Footer from "./(sub-pages)/Footer";
 import ProductCard from "./(components)/ProductCard";
 import ProductGrid from "./(sub-pages)/ProductGrid";
+import VideoImageCarousel from "./(sub-pages)/VideoImageCarousel";
 import StandardisationsAndAssociations from "./(sub-pages)/StdAndAss";
 import Link from "next/link";
 import WhoAreWeCarousel from "./(components)/WhoAreWeCarousel";
@@ -85,6 +86,7 @@ export default function Home() {
 <hr />
 
 <ProductGrid />
+<VideoImageCarousel textColor="#97571c" />
 
 <WhatOurCustomersHaveToSay />
 
