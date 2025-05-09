@@ -5,6 +5,7 @@ import WhoAreWe from "./(sub-pages)/WhoAreWe";
 import Form from "./(components)/Form";
 import Footer from "./(sub-pages)/Footer";
 import ProductCard from "./(components)/ProductCard";
+import ProductGrid from "./(sub-pages)/ProductGrid";
 import StandardisationsAndAssociations from "./(sub-pages)/StdAndAss";
 import Link from "next/link";
 import WhoAreWeCarousel from "./(components)/WhoAreWeCarousel";
@@ -77,10 +78,13 @@ export default function Home() {
       </section>
 
       {/* Carousel and Sections */}
+      
 
       <WhoAreWeCarousel />
 
 <hr />
+
+<ProductGrid />
 
 <WhatOurCustomersHaveToSay />
 
