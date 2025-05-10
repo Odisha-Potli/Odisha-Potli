@@ -5,7 +5,7 @@ import WhoAreWe from "./(sub-pages)/WhoAreWe";
 import Form from "./(components)/Form";
 import Footer from "./(sub-pages)/Footer";
 import ProductGrid from "./(sub-pages)/ProductGrid";
-import VideoImageCarousel from "./(sub-pages)/VideoImageCarousel";
+import Video from "./(sub-pages)/Video";
 import ArtAndCraft from "./(sub-pages)/ArtAndCraft";
 import StandardisationsAndAssociations from "./(sub-pages)/StdAndAss";
 import Link from "next/link";
@@ -45,19 +45,19 @@ export default function Home() {
         </Link>
       </section>
 
-      <div className="-mt-40"> {/* Reduced Top Margin */}
+      <div className="-mt-37"> {/* Reduced Top Margin */}
         <WhoAreWeCarousel />
       </div>
 
       <hr />
-      <div className="-mt-23">
+      <div className="-mt-20">
         <ProductGrid />
       </div>
 
       <div className="-mt-17">
         <ArtAndCraft />
       </div>
-
+<Video />
       <WhatOurCustomersHaveToSay />
 
       <div className="-mt-10">
