@@ -1,32 +1,43 @@
 import React from "react";
 import Image from "next/image";
 
-const Video = () => {
-  const images = [
-    { id: 1, src: "/IMG_6812.jpg" },
-    { id: 2, src: "/image2.jpg" },
-    { id: 3, src: "/image3.jpg" },
-    { id: 4, src: "/image4.jpg" },
+export default function Video() {
+  const products = [
+    {
+      imageUrl: "/IMG_6812.jpg"
+    },
+    {
+      imageUrl: "/Pothichitra-600x600.jpg"
+    },
+    {
+      imageUrl: "/20250308_163551.png"
+    },
+    {
+      imageUrl: "/Pattachitra-Ramayan-Story-600x600.jpg"
+    }
   ];
 
   return (
-    <div className="p-4 space-y-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-        {images.map((image) => (
-          <div key={image.id} className="relative h-64">
+    <div className="py-10 px-4 font-sans">
+      <div className="py-4 text-center">
+        <h1 className="text-4xl font-semibold" style={{ color: "#97571c" }}>
+          Our Goal
+        </h1>
+      </div>
+
+      <div className="grid grid-cols-4 gap-4 md:gap-6">
+        {products.map((product, index) => (
+          <div key={index} className="relative">
             <Image
-              src={image.src}
-              alt={`Gallery image ${image.id}`}
-              fill
-              className="object-cover rounded-lg"
-              priority={image.id === 1}
-              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
+              src={product.imageUrl}
+              alt={`Product Image ${index + 1}`}
+              width={250}
+              height={300}
+              className="object-cover w-full h-[200px] md:h-[300px] transition-transform duration-300 hover:scale-105"
             />
           </div>
         ))}
       </div>
     </div>
   );
-};
-
-export default Video;
+}
