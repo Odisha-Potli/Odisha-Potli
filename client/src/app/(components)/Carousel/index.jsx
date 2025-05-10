@@ -47,7 +47,7 @@ const Carousel = () => {
   const imageHeight = 1024;
 
   return (
-    <div>
+    <div className="w-full">
       <div className="embla relative">
         <div className="embla-wrapper relative mx-auto">
           {/* Left Button */}
@@ -60,17 +60,18 @@ const Carousel = () => {
           </button>
           {/* Viewport */}
           <div
-            className="embla__viewport bg-[#ECE5DD] border lg:py-1 py-1 overflow-hidden"
+            className="embla__viewport bg-[#ECE5DD] border overflow-hidden"
             ref={emblaRef}
           >
-            <div className="embla__container h-full gap-10 flex">
-              <div className="embla__slide flex-shrink-0 flex items-center justify-center ml-10 min-w-0">
+            <div className="embla__container flex gap-8">
+              <div className="embla__slide flex-shrink-0 flex items-center justify-center ml-6 min-w-0">
                 <div className="rounded-xl overflow-hidden">
                   <Image
                     src="/Client1.jpeg"
                     width={imageWidth}
                     height={imageHeight}
                     alt="Client 1"
+                    className="object-contain"
                     priority
                   />
                 </div>
@@ -82,6 +83,7 @@ const Carousel = () => {
                     width={imageWidth}
                     height={imageHeight}
                     alt="Client 2"
+                    className="object-contain"
                   />
                 </div>
               </div>
@@ -92,6 +94,7 @@ const Carousel = () => {
                     width={imageWidth}
                     height={imageHeight}
                     alt="Client 3"
+                    className="object-contain"
                   />
                 </div>
               </div>
@@ -102,6 +105,7 @@ const Carousel = () => {
                     width={imageWidth}
                     height={imageHeight}
                     alt="Client 4"
+                    className="object-contain"
                   />
                 </div>
               </div>
@@ -112,6 +116,7 @@ const Carousel = () => {
                     width={imageWidth}
                     height={imageHeight}
                     alt="Client 5"
+                    className="object-contain"
                   />
                 </div>
               </div>
