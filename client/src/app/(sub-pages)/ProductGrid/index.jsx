@@ -40,13 +40,13 @@ export default function ProductGrid() {
     <div className="py-10 px-4 font-sans">
       {/* Heading with custom text color */}
       <div className="py-4 text-center">
-        <h2
+        <h1
           className="text-2xl font-semibold"
           style={{ color: "#97571c" }} // <-- Replace with your preferred hex code
         >
           Handcrafted Dresses
-        </h2>
-        <p className="text-sm text-gray-600 mt-1">View all</p>
+        </h1>
+        <p className="text-sm text-gray-600 mt-1"></p>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
