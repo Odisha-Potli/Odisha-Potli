@@ -16,53 +16,47 @@ export default function Home() {
     <div className="bg-[#ECE5DD]">
       <Navbar />
 
-      {/* Desktop View */}
       <section
         style={{ backgroundImage: "url('/Frame 47467.png')" }}
         className="bg-no-repeat bg-cover sm:bg-contain bg-center w-full h-[80vh] hidden sm:flex flex-col justify-center px-6 lg:px-20 text-[#744d20]"
       >
-        <h1 className="text-[8vw] lg:text-[3rem] font-extrabold leading-tight drop-shadow-sm">
-          Discover<br />Odisha&apos;s Heritage
-        </h1>
-        <p className="mt-2 text-sm lg:text-lg font-medium max-w-2xl">
-          OdishaPotli – Where Tradition Meets Handcrafted Elegance
-        </p>
+        <h1 className="text-[8vw] lg:text-[3rem] font-extrabold leading-tight">Discover<br />Odisha&apos;s Heritage</h1>
+        <p className="mt-2 text-sm lg:text-lg font-medium max-w-2xl">OdishaPotli – Where Tradition Meets Handcrafted Elegance</p>
         <Link href="/Shop/" className="mt-3 w-fit">
           <button className="px-6 py-2 text-base font-bold bg-[#97571c] text-white rounded-lg">Shop Now!</button>
         </Link>
       </section>
 
-      {/* Mobile View */}
-      <section className="sm:hidden flex flex-col justify-center items-center px-4 text-center text-[#744d20] bg-[#ECE5DD]">
+      <section className="sm:hidden flex flex-col items-center px-4 text-center text-[#744d20] bg-[#ECE5DD]">
         <h1 className="text-[8vw] font-extrabold leading-snug">Discover<br />Odisha&apos;s Heritage</h1>
-        <div style={{ backgroundImage: "url('/Frame 47469.png')" }} className="w-full h-[30vh] bg-cover bg-center mt-2 rounded-lg" />
+        <div className="w-full h-[30vh] bg-cover bg-center mt-2 rounded-lg" style={{ backgroundImage: "url('/Frame 47469.png')" }} />
         <p className="mt-2 text-sm font-medium">OdishaPotli – Where Tradition Meets Handcrafted Elegance</p>
         <Link href="/Shop/" className="mt-3">
           <button className="px-4 py-2 text-sm font-bold bg-[#97571c] text-white rounded-lg">Shop Now!</button>
         </Link>
       </section>
 
-      <div className="-mt-6"> {/* Reduced Top Margin */}
+      <div className="mt-0">
         <WhoAreWeCarousel />
       </div>
 
       <hr />
-      <div className="-mt-20">
+
+      <div className="mt-0">
         <ProductGrid />
       </div>
 
-      <div className="-mt-13">
+      <div className="mt-0">
         <ArtAndCraft />
       </div>
 
       <WhatOurCustomersHaveToSay />
 
-      <div className="-mt-8">
+      <div className="mt-0">
         <StandardisationsAndAssociations />
       </div>
 
-      {/* Contact Section */}
-      <div className="flex justify-center font-bold mb-2 -mt-4">
+      <div className="flex justify-center font-bold mb-2">
         <div className="text-[6vw] sm:text-[5vw] md:text-[4vw] lg:text-[2.5rem] text-black">
           <span className="text-[#97571c]">Contact</span> Us
         </div>
