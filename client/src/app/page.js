@@ -28,7 +28,7 @@ export default function Home() {
           OdishaPotli – Where Tradition Meets Handcrafted Elegance
         </p>
         <p className="mt-2 text-sm lg:text-base max-w-3xl leading-relaxed">
-          OdishaPotli is your gateway to Odisha&apos;s rich heritage, offering a curated collection of handwoven sarees, handcrafted clothing, and traditional crafts.
+          OdishaPotli is your gateway to Odisha&apos;s rich heritage, offering a curated collection of <br />handwoven sarees, handcrafted clothing, and traditional crafts.
         </p>
         <Link href="/Shop/" className="mt-4 w-fit">
           <button className="px-6 py-2 text-base font-bold bg-[#97571c] text-white rounded-lg">Shop Now!</button>
