@@ -46,7 +46,7 @@ export default function Home() {
         </Link>
       </section>
 
-      <div className="-mt-5"> {/* Reduced Top Margin */}
+      <div className="-mt-10"> {/* Reduced Top Margin */}
         <WhoAreWeCarousel />
       </div>
 
