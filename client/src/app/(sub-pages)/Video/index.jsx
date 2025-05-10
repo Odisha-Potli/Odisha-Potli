@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function Video() {
   const products = [
     {
-      imageUrl: "/IMG_6812.jpg"
+      imageUrl: "/Screenshot 2025-05-10 160831.png"
     },
     {
       imageUrl: "/Pothichitra-600x600.jpg"
