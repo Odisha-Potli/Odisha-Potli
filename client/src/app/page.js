@@ -47,11 +47,11 @@ export default function Home() {
       </div>
 
       <hr />
-      <div className="-mt-8">
+      <div className="-mt-20">
         <ProductGrid />
       </div>
 
-      <div className="-mt-4">
+      <div className="-mt-13">
         <ArtAndCraft />
       </div>
 
