@@ -37,7 +37,7 @@ export default function Home() {
 
       {/* Mobile View */}
       <section className="sm:hidden flex flex-col justify-center items-center px-4 text-center text-[#744d20] bg-[#ECE5DD] h-screen">
-        <h1 className="text-[8vw] font-extrabold leading-snug">Discover<br />Odisha&apos;s Heritage</h1>
+        <h1 className="text-[8vw] font-extrabold leading-snug -mt-18">Discover<br />Odisha&apos;s Heritage</h1>
         <div style={{ backgroundImage: "url('/Frame 47469.png')" }} className="w-full h-2/5 bg-cover bg-center mt-2 rounded-lg" />
         <p className="mt-2 text-sm font-medium">OdishaPotli – Where Tradition Meets Handcrafted Elegance</p>
         <Link href="/Shop/" className="mt-3">
@@ -45,12 +45,12 @@ export default function Home() {
         </Link>
       </section>
 
-      <div className="-mt-27"> {/* Reduced Top Margin */}
+      <div className="-mt-40"> {/* Reduced Top Margin */}
         <WhoAreWeCarousel />
       </div>
 
       <hr />
-      <div className="-mt-20">
+      <div className="-mt-23">
         <ProductGrid />
       </div>
 
