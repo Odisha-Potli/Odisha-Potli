@@ -60,7 +60,7 @@ const Carousel = () => {
           </button>
           {/* Viewport */}
           <div
-            className="embla__viewport bg-[#ECE5DD] border lg:py-6 py-6 overflow-hidden"
+            className="embla__viewport bg-[#ECE5DD] border lg:py-1 py-1 overflow-hidden"
             ref={emblaRef}
           >
             <div className="embla__container h-full gap-10 flex">
