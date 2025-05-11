@@ -15,64 +15,75 @@ export default function Home() {
   return (
     <div className="bg-[#ECE5DD]">
       <Navbar />
-
       {/* Desktop View */}
-      <section
-        style={{ backgroundImage: "url('/Frame 47467.png')" }}
-        className="bg-no-repeat bg-cover sm:bg-contain bg-center w-full h-screen hidden sm:flex flex-col justify-center px-6 lg:px-20 text-[#744d20]"
-      >
-        <h1 className="text-[10vw] lg:text-[3rem] font-extrabold leading-tight drop-shadow-sm">
-          Discover<br />Odisha&apos;s Heritage
-        </h1>
-        <p className="mt-4 text-sm lg:text-lg font-medium max-w-2xl">
-          OdishaPotli – Where Tradition Meets Handcrafted Elegance
-        </p>
-        <p className="mt-2 text-sm lg:text-base max-w-3xl leading-relaxed">
-          OdishaPotli is your gateway to Odisha&apos;s rich heritage, offering a curated collection of <br />handwoven sarees, handcrafted clothing, and traditional crafts.
-        </p>
-        <Link href="/Shop/" className="mt-4 w-fit">
-          <button className="px-6 py-2 text-base font-bold bg-[#97571c] text-white rounded-lg">Shop Now!</button>
-        </Link>
+      <section className="hidden sm:block relative h-screen w-full overflow-hidden">
+        <img
+          src="/Screenshot 2025-05-11 122946.png"
+          alt="Odisha Heritage"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 flex flex-col justify-center px-6 lg:px-20 text-[white]">
+          <h1 className="text-[10vw] lg:text-[3rem] font-extrabold leading-tight drop-shadow-sm">
+            <span className="block">Discover</span>
+            <span className="block">Odisha&apos;s Heritage</span>
+          </h1>
+          <p className="mt-4 text-sm lg:text-lg font-medium max-w-2xl">
+            OdishaPotli – Where Tradition Meets Handcrafted Elegance
+          </p>
+          <p className="mt-2 text-sm lg:text-base max-w-3xl leading-relaxed whitespace-normal">
+            OdishaPotli is your gateway to Odisha&apos;s rich heritage, offering a curated collection of handwoven sarees, handcrafted clothing, and traditional crafts.
+          </p>
+          <Link href="/Shop/" className="mt-4 w-fit">
+            <button className="px-6 py-2 text-base font-bold bg-[#97571c] text-white rounded-lg">Shop Now!</button>
+          </Link>
+        </div>
       </section>
-
-      {/* Mobile View */}
-      <section className="sm:hidden flex flex-col justify-center items-center px-4 text-center text-[#744d20] bg-[#ECE5DD] h-screen">
-        <h1 className="text-[8vw] font-extrabold leading-snug -mt-22">Discover<br />Odisha&apos;s Heritage</h1>
-        <div style={{ backgroundImage: "url('/Frame 47469.png')" }} className="w-full h-2/5 bg-cover bg-center mt-2 rounded-lg" />
-        <p className="mt-2 text-sm font-medium">OdishaPotli – Where Tradition Meets Handcrafted Elegance</p>
-        <Link href="/Shop/" className="mt-3">
-          <button className="px-4 py-2 text-sm font-bold bg-[#97571c] text-white rounded-lg">Shop Now!</button>
-        </Link>
+     
+      {/* Mobile View - Improved with Fixed Text and Better Positioning */}
+      <section className="sm:hidden relative h-screen w-full">
+        <img
+          src="/Screenshot 2025-05-11 122946.png"
+          alt="Odisha Heritage Mobile"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 flex flex-col justify-end items-start px-6 pb-40 text-[white] bg-gradient-to-b from-transparent via-transparent to-white/60">
+          <h1 className="text-4xl font-extrabold leading-tight mb-2">
+            <span className="block">Discover</span>
+            <span className="block">Odisha&apos;s Heritage</span>
+          </h1>
+          <p className="text-base font-medium mb-3 max-w-xs">
+            OdishaPotli – Where Tradition Meets Handcrafted Elegance
+          </p>
+          <Link href="/Shop/" className="mb-4">
+            <button className="px-5 py-2 text-base font-bold bg-[#97571c] text-white rounded-lg shadow-md">
+              Shop Now!
+            </button>
+          </Link>
+        </div>
       </section>
-
-      <div className="-mt-37"> {/* Reduced Top Margin */}
-        <WhoAreWeCarousel />
-      </div>
-
-      <hr />
+      <div className="-mt-6">
+      <WhoAreWeCarousel />
+     </div>
       <div className="-mt-20">
         <ProductGrid />
       </div>
-
       <div className="-mt-17">
         <ArtAndCraft />
       </div>
-<Video />
+       <div className="-mt-7">
+      <Video />
+      </div>
       <WhatOurCustomersHaveToSay />
-
       <div className="-mt-10">
         <StandardisationsAndAssociations />
       </div>
-
-      {/* Contact Section */}
+      {/* Contact Section - Fixed Text Sizing */}
       <div className="flex justify-center font-bold mb-2 -mt-5">
-        <div className="text-[6vw] sm:text-[5vw] md:text-[4vw] lg:text-[2.5rem] text-black">
+        <div className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl text-black">
           <span className="text-[#97571c]">Contact</span> Us
         </div>
       </div>
-
       <Form />
-
       <Footer />
     </div>
   );

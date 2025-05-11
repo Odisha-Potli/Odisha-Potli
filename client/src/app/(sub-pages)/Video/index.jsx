@@ -94,7 +94,7 @@ export default function VideoImageCarousel() {
                   className="absolute inset-0 flex items-center justify-center"
                   onClick={() => handlePlayVideo(index)}
                 >
-                  <Play size={48} className="text-white bg-black rounded-full p-2" />
+                  <Play size={48} className="text-black bg-white rounded-full p-2" />
                 </button>
               </div>
             )}
@@ -145,7 +145,7 @@ export default function VideoImageCarousel() {
                 className="absolute inset-0 flex items-center justify-center"
                 onClick={() => handlePlayVideo(currentIndex)}
               >
-                <Play size={48} className="text-white bg-black rounded-full p-2" />
+                <Play size={48} className="text-black bg-white rounded-full p-2" />
               </button>
             </div>
           )}
@@ -153,13 +153,13 @@ export default function VideoImageCarousel() {
             className="absolute top-1/2 left-2 transform -translate-y-1/2"
             onClick={goToPrevious}
           >
-            <ChevronLeft size={32} className="text-white bg-black rounded-full p-1" />
+            <ChevronLeft size={32} className="text-white bg-gray rounded-full p-1" />
           </button>
           <button
             className="absolute top-1/2 right-2 transform -translate-y-1/2"
             onClick={goToNext}
           >
-            <ChevronRight size={32} className="text-white bg-black rounded-full p-1" />
+            <ChevronRight size={32} className="text-white bg-gray rounded-full p-1" />
           </button>
         </div>
 
@@ -176,13 +176,13 @@ export default function VideoImageCarousel() {
             className="absolute top-1/2 left-2 transform -translate-y-1/2"
             onClick={goToPrevious}
           >
-            <ChevronLeft size={32} className="text-white bg-black rounded-full p-1" />
+            <ChevronLeft size={32} className="text-white bg-gray rounded-full p-1" />
           </button>
           <button
             className="absolute top-1/2 right-2 transform -translate-y-1/2"
             onClick={goToNext}
           >
-            <ChevronRight size={32} className="text-white bg-black rounded-full p-1" />
+            <ChevronRight size={32} className="text-white bg-gray rounded-full p-1" />
           </button>
         </div>
       </div>
