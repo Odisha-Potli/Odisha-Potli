@@ -4,6 +4,7 @@ import WhatOurCustomersHaveToSay from "./(sub-pages)/WhatOurCustomers";
 import WhoAreWe from "./(sub-pages)/WhoAreWe";
 import Form from "./(components)/Form";
 import Footer from "./(sub-pages)/Footer";
+import Productswap from "./(sub-pages)/Productswap";
 import ProductGrid from "./(sub-pages)/ProductGrid";
 import Video from "./(sub-pages)/Video";
 import ArtAndCraft from "./(sub-pages)/ArtAndCraft";
@@ -55,7 +56,7 @@ export default function Home() {
             OdishaPotli – Where Tradition Meets Handcrafted Elegance
           </p>
           <Link href="/Shop/" className="mb-4">
-            <button className="px-5 py-2 text-base font-bold bg-[#97571c] text-white rounded-lg shadow-md">
+            <button className="px-5 py-2 text-base font-bold bg-[#97571c] text-white rounded-lg shadow-md ">
               Shop Now!
             </button>
           </Link>
@@ -63,6 +64,9 @@ export default function Home() {
       </section>
       <div className="-mt-6">
       <WhoAreWeCarousel />
+     </div>
+<div className="-mt-20">
+     <Productswap />
      </div>
       <div className="-mt-20">
         <ProductGrid />
