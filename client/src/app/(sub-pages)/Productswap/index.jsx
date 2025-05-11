@@ -4,74 +4,74 @@ import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 const products = [
   {
-    name: "Okhai \"Grand Marina\" Tie-and-Dye Pure Cotton Black Dress",
-    image: "/products/p1.png",
-    price: "₹ 5,500.00",
-    rating: 4,
-    productLink: "https://www.odishapotli.com/Shop/category/dresses/grand-marina"
-  },
-  {
-    name: "Okhai 'Maria' Hand Embroidered Dress",
-    image: "/products/p2.png",
-    price: "₹ 4,500.00",
+    name: "Pichwai Art Inspired Nuapatna Ikat Saree",
+    image: "/hujsjva36br3uheblbel.jpg",
+    price: "₹ 40,000.00",
     rating: 5,
-    productLink: "https://www.odishapotli.com/Shop/category/dresses/maria"
+    productLink: "https://www.odishapotli.com/Shop/product/680e771893acc37f08880c13"
   },
   {
-    name: "Okhai 'Lavender Pearl' Mirror Work Halter Neck Dress",
-    image: "/products/p3.png",
-    price: "₹ 3,200.00",
+    name: "Sachipar Khandua Silk Saree- Yellow Temple Border",
+    image: "/gheiznqfrpdtteh1lwhq.jpg",
+    price: "₹ 10,100.00",
+    rating: 4,
+    productLink: "https://www.odishapotli.com/Shop/product/680e766893acc37f08880bff"
+  },
+  {
+    name: "Nuapatna Ikat Floral Bandha Silk Saree",
+    image: "/mcf7cbufp4y6jd7itmv3.jpg",
+    price: "₹ 16,000.00",
     rating: 5,
-    productLink: "https://www.odishapotli.com/Shop/category/dresses/lavender-pearl"
+    productLink: "https://www.odishapotli.com/Shop/product/680e522667a17847032bd224"
   },
   {
-    name: "Okhai 'Magical Elixir' Hand-Embroidered and Mirrorwork Pure Cotton",
-    image: "/products/p4.png",
-    price: "₹ 3,500.00",
+    name: "Nuapatna Khandua Saree in White",
+    image: "/xmeazjqsatzvxolxnin9.png",
+    price: "₹ 13,599.00",
     rating: 4,
-    productLink: "https://www.odishapotli.com/Shop/category/dresses/magical-elixir-1"
+    productLink: "https://www.odishapotli.com/Shop/product/680e4f1e67a17847032bd12f"
   },
   {
-    name: "Okhai 'Magical Elixir' Hand-Embroidered and Mirrorwork Pure Cotton",
-    image: "/products/p4.png",
-    price: "₹ 3,500.00",
-    rating: 4,
-    productLink: "https://www.odishapotli.com/Shop/category/dresses/magical-elixir-2"
+    name: "Bomkai Silk",
+    image: "/vy0pusdnvjpvzkpghmld.jpg",
+    price: "₹ 10,500.00",
+    rating: 3,
+    productLink: "https://www.odishapotli.com/Shop/product/680f3a7289be3aef2cdf4c36"
   },
   {
-    name: "Okhai 'Magical Elixir' Hand-Embroidered and Mirrorwork Pure Cotton",
-    image: "/products/p3.png",
-    price: "₹ 3,500.00",
-    rating: 4,
-    productLink: "https://www.odishapotli.com/Shop/category/dresses/magical-elixir-3"
+    name: "Sankha Bandhakala Sambalpuri Cotton Saree",
+    image: "/kgkua9pblfdufoaljzgw.jpg",
+    price: "₹ 15,500.00",
+    rating: 5,
+    productLink: "https://www.odishapotli.com/Shop/product/681ca519de5b5cd8c1798cd0"
   },
   {
-    name: "Okhai 'Magical Elixir' Hand-Embroidered and Mirrorwork Pure Cotton",
-    image: "/products/p4.png",
-    price: "₹ 3,500.00",
-    rating: 4,
-    productLink: "https://www.odishapotli.com/Shop/category/dresses/magical-elixir-4"
+    name: "Matsyakanya",
+    image: "/ozsmwevad2qewhqrcifb.jpg",
+    price: "₹ 10,000.00",
+    rating: 2,
+    productLink: "https://www.odishapotli.com/Shop/product/680e7e5fbbe8ae2a7989decc"
   },
   {
-    name: "Okhai 'Magical Elixir' Hand-Embroidered and Mirrorwork Pure Cotton",
-    image: "/products/p3.png",
-    price: "₹ 3,500.00",
-    rating: 4,
-    productLink: "https://www.odishapotli.com/Shop/category/dresses/magical-elixir-5"
+    name: "Dhalapathar Saree-Nritya",
+    image: "/x3hwnvh12hackqay2voc.png",
+    price: "₹ 19,499.00",
+    rating: 5,
+    productLink: "https://www.odishapotli.com/Shop/product/680f41af89be3aef2cdf5030"
   },
   {
-    name: "Okhai 'Magical Elixir' Hand-Embroidered and Mirrorwork Pure Cotton",
-    image: "/products/p4.png",
-    price: "₹ 3,500.00",
+    name: "Handpainted Nuapatna Silk Saree",
+    image: "/nmdmcwotkuudnzczd9vo.jpg",
+    price: "₹ 17,999.00",
     rating: 4,
-    productLink: "https://www.odishapotli.com/Shop/category/dresses/magical-elixir-6"
+    productLink: "https://www.odishapotli.com/Shop/product/680e4da567a17847032bd11b"
   },
   {
-    name: "Okhai 'Magical Elixir' Hand-Embroidered and Mirrorwork Pure Cotton",
-    image: "/products/p4.png",
-    price: "₹ 3,500.00",
+    name: "Siminoi inspired Nuapatna Silk Saree",
+    image: "/cbdkrtkdigp8tjbkobdp.jpg",
+    price: "₹ 13,199.00",
     rating: 4,
-    productLink: "https://www.odishapotli.com/Shop/category/dresses/magical-elixir-7"
+    productLink: "https://www.odishapotli.com/Shop/product/680e4bdc67a17847032bd104"
   },
 ];
 
@@ -184,7 +184,7 @@ export default function HandcraftedDresses() {
         </div>
         
         {/* Navigation controls positioned 15px below original position using absolute positioning */}
-        <div className="absolute top-4 mt-45 w-full flex justify-between px-2">
+        <div className="absolute top-4 mt-40 w-full flex justify-between px-2">
           <button
             onClick={() => scroll("left")}
             className={`p-2 bg-white shadow-md rounded-full hover:bg-gray-100 focus:outline-none active:bg-gray-200 transition-all ${showLeftArrow ? 'opacity-100' : 'opacity-50 cursor-not-allowed'}`}
