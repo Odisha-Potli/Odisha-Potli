@@ -47,15 +47,15 @@ export default function Home() {
           alt="Odisha Heritage Mobile"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 flex flex-col justify-end items-start px-6 pb-40 bg-gradient-to-b from-transparent via-transparent to-white/60">
+        <div className="absolute inset-0 flex flex-col justify-end items-start px-6 pb-46 bg-gradient-to-b from-transparent via-transparent to-white/60">
           <h1 className="text-4xl font-extrabold leading-tight mb-4">
             <span className="block text-[white]">Discover</span>
             <span className="block text-[white]">Odisha&apos;s Heritage</span>
           </h1>
-          <p className="text-base font-medium mb-10 max-w-xs mt-7text-[white]">
+          <p className="text-base font-medium mb-10 max-w-xs mt-7text-[black]">
          OdishaPotli – Where Tradition Meets Handcrafted Elegance. Discover timeless fashion crafted with heart, culture, and authenticity.Explore our curated range of dresses that celebrate Indian artisanship
           </p>
-          <Link href="/Shop/" className="mb-4">
+          <Link href="/Shop/" className="mb-6">
             <button className="px-5 py-2 text-base font-bold bg-[#97571c] text-white rounded-lg shadow-md mb-6 ">
               Shop Now!
             </button>
